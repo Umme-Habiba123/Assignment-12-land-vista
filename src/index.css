@@ -1,7 +1,8 @@
 @import "tailwindcss";
 @plugin "daisyui";
-
 @import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Sansita:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&display=swap');
 
 
 a.active{
@@ -16,6 +17,25 @@ a.active{
   font-weight: weight;
   font-style: normal;
 }
+/* google font-2 */
+.sansita-font {
+  font-family: "Sansita", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+/* 
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: [#802BB1];
+  --color-secondary: [#2D283E];
+  --color-3rd: [#564F6F];
+  --color-4th: [#D1D7E0];
+  --color-5th: [#4C495D];
+} */
 
 
 

@@ -5,28 +5,28 @@ import { FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
 const mockData = [
   {
     id: "1",
-    image: "/images/property1.jpg",
+    image: "https://i.ibb.co/MxG72xY2/gulshan.webp",
     location: "Gulshan, Dhaka",
     price: "৳ 80 Lac – ৳ 1.2 Cr",
     verified: true,
   },
   {
     id: "2",
-    image: "/images/property2.jpg",
+    image: "https://i.ibb.co/nMkDwYRQ/dhanmondi.webp",
     location: "Dhanmondi, Dhaka",
     price: "৳ 60 Lac – ৳ 90 Lac",
     verified: true,
   },
   {
     id: "3",
-    image: "/images/property3.jpg",
+    image: "https://i.ibb.co/sp2w0dFL/uttara.jpg",
     location: "Uttara, Dhaka",
     price: "৳ 50 Lac – ৳ 70 Lac",
     verified: false,
   },
   {
     id: "4",
-    image: "/images/property4.jpg",
+    image: "https://i.ibb.co/sp98mjjz/bashundhara.webp",
     location: "Bashundhara, Dhaka",
     price: "৳ 75 Lac – ৳ 95 Lac",
     verified: true,
@@ -38,15 +38,15 @@ const AdvertisementSection = () => {
     <section className="max-w-7xl mx-auto px-4 py-10">
       <h2 className="text-3xl font-bold text-center mb-8 text-[#4C495D]">Featured Properties</h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div data-aos="fade-right" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {mockData.map((property) => (
-          <div key={property.id} className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
+          <div key={property.id} className="bg-white shadow-xl hover:shadow-amber-200 rounded-lg overflow-hidden border border-gray-200 ">
             <img
               src={property.image}
               alt={property.location}
               className="w-full h-48 object-cover"
             />
-            <div className="p-4 space-y-2">
+            <div data-aos="fade-left" className="p-4 space-y-2">
               <h3 className="text-lg font-semibold flex items-center gap-2 text-[#2D283E]">
                 <FaMapMarkerAlt className="text-[#802BB1]" /> {property.location}
               </h3>
@@ -64,7 +64,7 @@ const AdvertisementSection = () => {
               </p>
 
               <Link to={`/properties/${property.id}`}>
-                <button className="btn btn-sm btn-primary mt-2">View Details</button>
+                <button className="btn btn-sm bg-[#802BB1] text-white hover:bg-[#2D283E] mt-2">View Details</button>
               </Link>
             </div>
           </div>

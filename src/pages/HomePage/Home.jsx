@@ -3,6 +3,8 @@ import Navbar from '../Shared/Navbar/Navbar';
 import Banner from './Banner/Banner';
 import Footer from '../Shared/Footer/Footer';
 import AdvertisementSection from './AdvertisementSection/AdvertisementSection';
+import TopAgents from './TopAgents/TopAgents';
+import ProjectsShowcase from './ProjectsShowcase/ProjectsShowcase';
 
 const Home = () => {
     return (
@@ -10,6 +12,8 @@ const Home = () => {
             <Navbar></Navbar>
             <Banner></Banner>
             <AdvertisementSection></AdvertisementSection>
+            <ProjectsShowcase></ProjectsShowcase>
+            <TopAgents></TopAgents>
             <Footer></Footer>
             
         </div>

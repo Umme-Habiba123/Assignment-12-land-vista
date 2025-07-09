@@ -29,7 +29,7 @@ const Banner = () => {
         stopOnHover
       >
         {bannerData.map(({ image, caption }, i) => (
-          <div key={i} className="relative h-[420px] md:h-[580px] lg:h-[650px]">
+          <div data-aos="zoom-out" key={i} className="relative h-[420px] md:h-[580px] lg:h-[750px]">
             <img
               src={image}
               alt={caption}
@@ -37,7 +37,7 @@ const Banner = () => {
             />
 
             {/* overlay + caption + button */}
-            <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center space-y-6">
+            <div data-aos="zoom-out" className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center space-y-6">
               <h2 className="text-white text-2xl md:text-5xl font-bold leading-snug drop-shadow-lg">
                 {caption}
               </h2>

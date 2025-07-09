@@ -4,7 +4,10 @@ import './index.css'
 import {RouterProvider,} from "react-router";
 import AuthProvider from './context/Provider/AuthProvider';
 import { router } from './routes/router';
+import 'aos/dist/aos.css';
+import Aos from 'aos';
 
+Aos.init()
 
 
 createRoot(document.getElementById('root')).render(

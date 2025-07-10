@@ -1,11 +1,15 @@
 import { NavLink } from 'react-router';
-// import userPhoto from '../../assets/user.png';
+import userPhoto from '../../../assets/user.png';
 import { AiFillHome } from "react-icons/ai";
 import useAuth from '../../../hooks/useAuth';
 import { FaBuilding } from 'react-icons/fa';
 import { MdDashboard } from 'react-icons/md';
-
 import VistaLand from '../ProjectLogo/VistaLand';
+// import { MdDashboard } from "react-icons/md";
+import { FaUserTie, FaUserShield, FaUser, } from "react-icons/fa";
+import { IoIosArrowDown } from 'react-icons/io';
+import DashboardLayout from '../../../Layouts/DashboardLayout';
+import DashboardDropdown from '../../../Components/DashboardDropdown/DashboardDropdown';
 
 
 const Navbar = () => {
@@ -34,21 +38,12 @@ const Navbar = () => {
       </NavLink>
     </li>
 
-   <div className="dropdown dropdown-bottom">
-  <div tabIndex={0} role="button" className="m-1 flex items-center gap-1 cursor-pointer">
-    <MdDashboard />
-    Dashboard
-  </div>
-  <ul tabIndex={0} className="dropdown-content menu bg-[#564F6F] font-bold text-white  rounded-box z-10 w-52 p-2 shadow">
-    <li>
-      <NavLink to="/dashboard/agent">Agent</NavLink>
-    </li>
-    <li>
-      <NavLink to="/dashboard/admin">Admin</NavLink>
-    </li>
-  </ul>
-</div>
-
+    {
+      user && <>
+      <DashboardDropdown></DashboardDropdown>
+       
+      </>
+    }
 
 
   </>
@@ -81,11 +76,11 @@ const Navbar = () => {
         <div className="flex items-center gap-4 ">
 
           <div className='relative group w-10 h-10'>
-            {/* <img
-            className='w-10 h-10 rounded-full object-cover border border-purple-300'
-            src={user?.photoURL || userPhoto}
-            alt="User"
-          /> */}
+            <img
+              className='w-10 h-10 rounded-full object-cover border border-purple-300'
+              src={user?.photoURL || userPhoto}
+              alt="User"
+            />
             {
               user?.displayName &&
               <div>

@@ -36,9 +36,9 @@ const LatestReviews = () => {
       </div>
 
       {/* Reviews Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div data-aos="fade-down-right" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {reviews.map((review) => (
-          <div
+          <div data-aos="flip-left"
             key={review.id}
             className="bg-white border border-gray-200 rounded-lg p-6 shadow-md"
           >

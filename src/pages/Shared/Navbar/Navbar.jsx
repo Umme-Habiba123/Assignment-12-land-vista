@@ -34,11 +34,21 @@ const Navbar = () => {
       </NavLink>
     </li>
 
-    <li className="" data-tip="Dashboard">
-      <NavLink to="/dashboard" className="flex items-center gap-1">
-        <MdDashboard /> Dashboard
-      </NavLink>
+   <div className="dropdown dropdown-bottom">
+  <div tabIndex={0} role="button" className="m-1 flex items-center gap-1 cursor-pointer">
+    <MdDashboard />
+    Dashboard
+  </div>
+  <ul tabIndex={0} className="dropdown-content menu bg-[#564F6F] font-bold text-white  rounded-box z-10 w-52 p-2 shadow">
+    <li>
+      <NavLink to="/dashboard/agent">Agent</NavLink>
     </li>
+    <li>
+      <NavLink to="/dashboard/admin">Admin</NavLink>
+    </li>
+  </ul>
+</div>
+
 
 
   </>
@@ -88,26 +98,40 @@ const Navbar = () => {
 
           <>
             <p className="hidden sm:block text-xs text-gray-500">{user?.email}</p>
-            <button
-              onClick={handleSignOut}
-              className="btn btn-outline btn-sm border-2 border-white bg-[#564F6F] text-white hover:bg-[#D1D7E0] font-bold
+
+          </>
+
+          <div className="flex items-center gap-4">
+            {
+              user ? (
+
+                <>
+                  <button
+                    onClick={handleSignOut}
+                    className="btn btn-outline btn-sm border-2 border-white bg-[#564F6F] text-white hover:bg-[#D1D7E0] font-bold
                hover:text-[#802BB1] p-4 "
-            >
+                  >
+                    LOG OUT
+                  </button>
 
-             
+                </>
+              ) : (
+                <>
+                  <NavLink to="/login">
+                    <button className="btn btn-outline border-2 border-white btn-sm bg-[#564F6F] font-bold text-white hover:bg-[#D1D7E0] hover:text-[#802BB1] p-4">
+                      LOG IN
+                    </button>
+                  </NavLink>
+                  <NavLink to="/registration">
+                    <button className="btn btn-outline border-2 btn-sm bg-[#564F6F] text-white border-white hover:bg-[#D1D7E0] hover:text-[#802BB1] font-bold p-4">
+                      REGISTRATION
+                    </button>
+                  </NavLink>
+                </>
+              )
+            }
+          </div>
 
-              LOG OUT
-            </button>
-          </>
-
-          <>
-            <NavLink to="/logIn">
-              <button className="btn btn-outline  border-2  border-white btn-sm bg-[#564F6F] font-bold text-white hover:bg-[#D1D7E0] hover:text-[#802BB1] p-4">LOG IN</button>
-            </NavLink>
-            <NavLink to="/register">
-              <button className="btn btn-outline  border-2 btn-sm bg-[#564F6F] text-white  border-white hover:bg-[#D1D7E0] hover:text-[#802BB1] font-bold p-4" >REGISTER</button>
-            </NavLink>
-          </>
 
         </div>
       </div>

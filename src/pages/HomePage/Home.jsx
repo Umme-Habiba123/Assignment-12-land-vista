@@ -5,6 +5,7 @@ import Footer from '../Shared/Footer/Footer';
 import AdvertisementSection from './AdvertisementSection/AdvertisementSection';
 import TopAgents from './TopAgents/TopAgents';
 import ProjectsShowcase from './ProjectsShowcase/ProjectsShowcase';
+import LatestReviews from './LatestReview/LatestReview';
 
 const Home = () => {
     return (
@@ -13,6 +14,7 @@ const Home = () => {
             <Banner></Banner>
             <AdvertisementSection></AdvertisementSection>
             <ProjectsShowcase></ProjectsShowcase>
+            <LatestReviews></LatestReviews>
             <TopAgents></TopAgents>
             <Footer></Footer>
             

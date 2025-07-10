@@ -44,3 +44,11 @@ a.active{
               /* #564F6F ---3 */
               /* #2D283E ---2 */
               /* #802BB1  purple ---1 */
+
+
+              /* const {signInWithGoogle}=useAuth()
+    const location=useLocation()
+    const navigate=useNavigate()
+    const {signIn}=useAuth() */
+
+    /* const from =location.state?.from || '/'; */

@@ -7,6 +7,7 @@ import Home from "../pages/HomePage/Home";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../pages/Authentication/Login/Login";
+import Registration from "../pages/Authentication/Registration/Registration";
 
 
 export const router = createBrowserRouter([
@@ -19,10 +20,7 @@ export const router = createBrowserRouter([
             index:true,
             Component:Home
         },
-        {
-            index:true,
-            Component:Home
-        },
+       
     ]
   },
   {
@@ -32,7 +30,11 @@ export const router = createBrowserRouter([
       {
         path:'login',
         Component:Login
-      }
+      },
+      {
+        path:'registration',
+        Component:Registration
+      },
     ]
   },
 ]);

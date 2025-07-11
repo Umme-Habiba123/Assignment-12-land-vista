@@ -14,50 +14,62 @@ import DashboardLayout from "../Layouts/DashboardLayout";
 import AgentDashboard from "../pages/Dashboard/Agent/AgentDashboard";
 import AdminDashboard from "../pages/Dashboard/Admin/AdminDashboard";
 import UserDashboard from "../pages/Dashboard/User/UserDashboard";
+import AddProperty from "../pages/Dashboard/Agent/AddProperty/AddProperty";
 
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component:RootLayout,
-    errorElement:<ErrorPage></ErrorPage>,
-    children:[
-        {
-            index:true,
-            Component:Home
-        },
-       
+    Component: RootLayout,
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        index: true,
+        Component: Home
+      },
+
     ]
   },
   {
-    path:'/',
-    Component:AuthLayout,
-    children:[
+    path: '/',
+    Component: AuthLayout,
+    children: [
       {
-        path:'login',
-        Component:Login
+        path: 'login',
+        Component: Login
       },
       {
-        path:'registration',
-        Component:Registration
+        path: 'registration',
+        Component: Registration
       },
     ]
   },
   {
-    path:'/dashboard',
-    element:<PrivateRoute>
+    path: '/dashboard',
+    element: <PrivateRoute>
       <DashboardLayout></DashboardLayout>
     </PrivateRoute>,
-    children:[
-     
+    children: [
       {
-        path:'admin',
+
+        path: 'agent',
+        Component: AgentDashboard,
+      },
+
+      {
+        path: 'agent/addProperty',
+        element: <AddProperty />
+      },
+
+
+      {
+        path: 'admin',
         Component: AdminDashboard
       },
       {
-        path:'user',
+        path: 'user',
         Component: UserDashboard
       },
     ]
   }
-]);4
+]); 4

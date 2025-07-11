@@ -1,39 +1,25 @@
-// components/AgentDashboardLinks.jsx
 import { NavLink } from "react-router";
-import { FaUserCircle, FaPlusCircle, FaClipboardList, FaCheckCircle, FaEnvelopeOpenText } from "react-icons/fa";
+import {
+  FaUserCircle, FaPlusCircle, FaClipboardList,
+  FaCheckCircle, FaEnvelopeOpenText
+} from "react-icons/fa";
 
-const AgentDashboard = () => {
+const AgentDashboardLinks = () => {
+  const linkStyle = ({ isActive }) =>
+    `flex items-center gap-2 p-2 rounded hover:bg-gray-300 font-medium ${isActive ? 'bg-gray-300' : ''}`;
+
   return (
-    <>
-      <h2 className="text-xl font-bold mb-4">Agent Dashboard</h2>
-      
-      <li>
-        <NavLink to="/dashboard/agent/profile" className="flex items-center gap-2">
-          <FaUserCircle /> Agent Profile
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/dashboard/agent/add-property" className="flex items-center gap-2">
-          <FaPlusCircle /> Add Property
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/dashboard/agent/my-properties" className="flex items-center gap-2">
-          <FaClipboardList /> My Properties
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/dashboard/agent/sold-properties" className="flex items-center gap-2">
-          <FaCheckCircle /> Sold Properties
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/dashboard/agent/offered-properties" className="flex items-center gap-2">
-          <FaEnvelopeOpenText /> Offered Properties
-        </NavLink>
-      </li>
-    </>
+    <div>
+      <h2 className="text-lg font-bold mb-4">Agent Dashboard</h2>
+      <ul className="space-y-2">
+        <li><NavLink to="/dashboard/agent" className={linkStyle} end><FaUserCircle /> Profile</NavLink></li>
+        <li><NavLink to="/dashboard/agent/addProperty" className={linkStyle}><FaPlusCircle /> Add Property</NavLink></li>
+        <li><NavLink to="/dashboard/agent/my-properties" className={linkStyle}><FaClipboardList /> My Properties</NavLink></li>
+        <li><NavLink to="/dashboard/agent/sold-properties" className={linkStyle}><FaCheckCircle /> Sold Properties</NavLink></li>
+        <li><NavLink to="/dashboard/agent/offered-properties" className={linkStyle}><FaEnvelopeOpenText /> Offered Properties</NavLink></li>
+      </ul>
+    </div>
   );
 };
 
-export default AgentDashboard;
+export default AgentDashboardLinks;

@@ -7,8 +7,9 @@
 
 a.active{
    color:rgb(8, 164, 8);
-  color: white ;
+  color: green ;
    font-weight:bold;
+   scale: 1.1;
 }
 /* google font-1 */
 .urbanist-font {

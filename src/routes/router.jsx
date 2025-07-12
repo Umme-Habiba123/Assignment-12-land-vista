@@ -15,6 +15,8 @@ import AgentDashboard from "../pages/Dashboard/Agent/AgentDashboard";
 import AdminDashboard from "../pages/Dashboard/Admin/AdminDashboard";
 import UserDashboard from "../pages/Dashboard/User/UserDashboard";
 import AddProperty from "../pages/Dashboard/Agent/AddProperty/AddProperty";
+import MyProperties from "../pages/Dashboard/Agent/MyProperties/MyProperties";
+import UpdateProperty from "../pages/Dashboard/Agent/MyProperties/UpdateProperty/UpdateProperty";
 
 
 export const router = createBrowserRouter([
@@ -59,6 +61,14 @@ export const router = createBrowserRouter([
       {
         path: 'agent/addProperty',
         element: <AddProperty />
+      },
+      {
+        path: 'agent/my-properties',
+        element: <MyProperties></MyProperties>
+      },
+      {
+        path: 'agent/update-property/:id',
+        element: <UpdateProperty></UpdateProperty>
       },
 
 

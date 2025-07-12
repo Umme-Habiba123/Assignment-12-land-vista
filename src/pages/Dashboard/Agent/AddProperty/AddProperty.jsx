@@ -1,20 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const AddProperty = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
-
+  const [imageURL, setImageURL] = useState(null);
   const { register, handleSubmit } = useForm();
+
+    const handleImageUpload = async (e) => {
+  const image = e.target.files[0];
+
+  const formData = new FormData();
+  formData.append('image', image);
+
+  const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_upload_Key}`;
+
+  try {
+    const res = await axios.post(imageUploadUrl, formData);
+    if (res.data.success) {
+      setImageURL(res.data.data.url);
+      Swal.fire("Uploaded!", "Image uploaded successfully.", "success");
+    }
+  } catch (err) {
+    console.error("Image upload failed", err);
+    Swal.fire("Failed", "Image upload failed!", "error");
+  }
+};
+
 
   const onSubmit = async (data) => {
     const propertyData = {
       title: data.title,
       location: data.location,
-      image: data.image[0].name,
+      image: imageURL,
       agentName: user.displayName,
       agentEmail: user.email,
       minPrice: parseFloat(data.minPrice),
@@ -37,6 +59,9 @@ const AddProperty = () => {
       Swal.fire('Error', 'Something went wrong!', 'error');
     }
   };
+
+
+
 
   return (
     <div className="min-h-screen bg-gray-200 flex">
@@ -75,6 +100,7 @@ const AddProperty = () => {
               <input
                 type="file"
                 {...register('image', { required: true })}
+                  onChange={handleImageUpload}
                 className="w-full file-input file-input-bordered border-2 border-gray-300 focus:outline-none focus:border-purple-200"
                 accept="image/*"
               />

@@ -11,7 +11,7 @@ const DashboardDropdown = () => {
         <div className="dropdown dropdown-bottom">
             <div tabIndex={0} role="button" className="m-1 flex items-center gap-1 cursor-pointer">
                 <MdDashboard />
-                Dashboard <IoIosArrowDown size={25}/>
+                Dashboard <IoIosArrowDown size={20}/>
             </div>
             <ul tabIndex={0} className="dropdown-content menu bg-[#868589] font-bold text-white rounded-box z-10 w-52 p-2 shadow">
                 <li>

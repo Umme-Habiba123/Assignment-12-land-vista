@@ -1,16 +1,24 @@
-import { NavLink } from 'react-router';
-import { FaUser, FaPlus, FaClipboardList, FaCheckCircle, FaEnvelope } from 'react-icons/fa';
+import { NavLink } from "react-router";
+import {
+  FaUserCircle, FaPlusCircle, FaClipboardList,
+  FaCheckCircle, FaEnvelopeOpenText
+} from "react-icons/fa";
 
 const AgentSidebar = () => {
+  const linkStyle = ({ isActive }) =>
+    `flex items-center gap-2 p-2 rounded hover:bg-gray-300 font-medium ${isActive ? 'bg-gray-300' : ''}`;
+
   return (
-    <>
-      <h2 className="text-xl font-bold text-purple-700 mb-4">Agent Dashboard</h2>
-      <li><NavLink to="my-profile"><FaUser /> My Profile</NavLink></li>
-      <li><NavLink to="add-property"><FaPlus /> Add Property</NavLink></li>
-      <li><NavLink to="my-properties"><FaClipboardList /> My Properties</NavLink></li>
-      <li><NavLink to="requested-properties"><FaEnvelope /> Requested/Offered</NavLink></li>
-      <li><NavLink to="sold-properties"><FaCheckCircle /> Sold Properties</NavLink></li>
-    </>
+    <div>
+      <h2 className="text-lg font-bold mb-4">Agent Dashboard</h2>
+      <ul className="space-y-2">
+        <li><NavLink to="/dashboard/agent" className={linkStyle} end><FaUserCircle /> Profile</NavLink></li>
+        <li><NavLink to="/dashboard/agent/addProperty" className={linkStyle}><FaPlusCircle /> Add Property</NavLink></li>
+        <li><NavLink to="/dashboard/agent/my-properties" className={linkStyle}><FaClipboardList /> My Properties</NavLink></li>
+        <li><NavLink to="/dashboard/agent/sold-properties" className={linkStyle}><FaCheckCircle /> Sold Properties</NavLink></li>
+        <li><NavLink to="/dashboard/agent/offered-properties" className={linkStyle}><FaEnvelopeOpenText /> Offered Properties</NavLink></li>
+      </ul>
+    </div>
   );
 };
 

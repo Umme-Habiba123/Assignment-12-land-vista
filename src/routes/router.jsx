@@ -22,6 +22,7 @@ import AdminProfile from "../pages/Dashboard/Admin/AminProfile/AdminProfile";
 import ManageUsers from "../Components/ManageUser/ManageUser";
 import ManageProperties from "../pages/Dashboard/Admin/ManageProperties/ManageProperties";
 import LatestReviews from "../pages/HomePage/LatestReview/LatestReview";
+import AllPropertyDetails from "../pages/AllProperties/PropertyDetails/PropertyDetails";
 
 
 export const router = createBrowserRouter([
@@ -38,6 +39,12 @@ export const router = createBrowserRouter([
         path: 'all-properties',
         element: <PrivateRoute>
           <AllProperties></AllProperties>
+        </PrivateRoute>
+      },
+      {
+        path: '/property-details/:id',
+        element: <PrivateRoute>
+          <AllPropertyDetails></AllPropertyDetails>
         </PrivateRoute>
       },
 

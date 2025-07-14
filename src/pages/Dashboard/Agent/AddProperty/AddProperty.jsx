@@ -56,6 +56,7 @@ const AddProperty = () => {
 
       }
     } catch (error) {
+      console.log(error)
       Swal.fire('Error', 'Something went wrong!', 'error');
     }
   };

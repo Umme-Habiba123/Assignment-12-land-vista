@@ -37,6 +37,11 @@ const Navbar = () => {
         <FaBuilding /> All Properties
       </NavLink>
     </li>
+    <li>
+      <NavLink to="/all-property-details" className="flex items-center gap-1">
+        <FaBuilding /> All Property Details
+      </NavLink>
+    </li>
 
     {
       user && <>

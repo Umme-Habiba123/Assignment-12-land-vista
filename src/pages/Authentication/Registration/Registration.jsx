@@ -48,40 +48,40 @@ const Registration = () => {
             .catch(console.error);
     };
 
-  const handleRegister = () => {
-  signInWithGoogle()
-    .then(async (result) => {
-      const user = result.user;
+    const handleRegister = () => {
+        signInWithGoogle()
+            .then(async (result) => {
+                const user = result.user;
 
-      const userInfo = {
-        name: user.displayName, // এখানে `user.name` নয়, `user.displayName` দিতে হবে
-        email: user.email,
-         photo: user.photoURL,
-        role: 'user',
-        isFirstLogin: true,
-        createdAt: new Date().toISOString()
-      };
+                const userInfo = {
+                    name: user.displayName,
+                    email: user.email,
+                    photo: user.photoURL,
+                    role: 'user',
+                    isFirstLogin: true,
+                    createdAt: new Date().toISOString()
+                };
 
-      try {
-        await axiosInstance.post('/users', userInfo); // Save user in DB
+                try {
+                    await axiosInstance.post('/users', userInfo); // Save user in DB
 
-        Swal.fire({
-          icon: 'success',
-          title: 'Registration Successful',
-          text: 'Welcome to VistaLand!',
-          timer: 2000,
-          showConfirmButton: false
-        });
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Registration Successful',
+                        text: 'Welcome to VistaLand!',
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
 
-        navigate(from);
-      } catch (err) {
-        console.error("Failed to save Google user:", err);
-      }
-    })
-    .catch((error) => {
-      console.error("Google Sign-in failed:", error);
-    }); 
-};
+                    navigate(from);
+                } catch (err) {
+                    console.error("Failed to save Google user:", err);
+                }
+            })
+            .catch((error) => {
+                console.error("Google Sign-in failed:", error);
+            });
+    };
 
 
     const handleImageUpload = async (e) => {
@@ -94,14 +94,14 @@ const Registration = () => {
     };
 
     return (
-        <div className="min-h-screen px-4 py-10 bg-gray-100">
+        <div className="min-h-screen px-4 py-10 bg-gray-400">
             {/* Logo */}
             <div className="max-w-4xl mx-auto mb-8">
                 <VistaLand />
             </div>
 
             {/* Registration Card */}
-            <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6 sm:p-8">
+            <div className="max-w-md mx-auto bg-gray-200 shadow-lg rounded-lg p-6 sm:p-8">
                 <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center sansita-font">
                     Create An Account
                 </h2>
@@ -115,7 +115,13 @@ const Registration = () => {
                     <div>
                         <label className="block font-medium mb-1">Profile Picture</label>
                         <input onChange={handleImageUpload} type="file" className="file-input file-input-bordered w-full cursor-pointer" />
+
+                        {profilePic && (
+                            <img src={profilePic} alt="Preview" className="h-16 w-16 rounded-full mt-2" />
+                        )}
+
                     </div>
+
 
                     <div>
                         <label className="block font-medium mb-1">Email</label>

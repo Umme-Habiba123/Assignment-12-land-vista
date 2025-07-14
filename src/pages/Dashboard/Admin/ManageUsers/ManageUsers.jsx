@@ -1,5 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
@@ -9,36 +8,50 @@ const ManageUsers = () => {
 
   // 🔹 Load users
   const { data: users = [], isLoading } = useQuery({
-    queryKey: ['users'],
+    queryKey: ["users"],
     queryFn: async () => {
-      const res = await axiosSecure.get('/users');
+      const res = await axiosSecure.get("/users");
       return res.data;
-    }
+    },
   });
 
-  // 🔸 Handle user role changes & fraud
+  // 🔸 Handle user role changes
   const updateRole = async (id, role) => {
-    const res = await axiosSecure.patch(`/users/${role}/${id}`);
-    if (res.data.modifiedCount > 0) {
-      Swal.fire('Success', `User ${role} updated`, 'success');
-      queryClient.invalidateQueries(['users']);
+    try {
+      const res = await axiosSecure.patch(`/users/role/${id}`, { role });
+      if (res.data.modifiedCount > 0) {
+        Swal.fire("Success", `User role updated to ${role}`, "success");
+        queryClient.invalidateQueries(["users"]);
+      } else {
+        Swal.fire("Info", "Role update was not necessary", "info");
+      }
+    } catch (error) {
+      console.error(error);
+      Swal.fire("Error", "Failed to update role", "error");
     }
   };
 
   // 🔸 Delete user
   const handleDelete = async (id, email) => {
     Swal.fire({
-      title: 'Delete this user?',
+      title: "Delete this user?",
       text: "This will remove the user from DB & Firebase!",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonText: 'Yes, delete'
+      confirmButtonText: "Yes, delete",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await axiosSecure.delete(`/users/${id}?email=${email}`);
-        if (res.data.success) {
-          Swal.fire('Deleted!', 'User has been deleted.', 'success');
-          queryClient.invalidateQueries(['users']);
+        try {
+          const res = await axiosSecure.delete(`/users/${id}?email=${email}`);
+          if (res.data.success) {
+            Swal.fire("Deleted!", "User has been deleted.", "success");
+            queryClient.invalidateQueries(["users"]);
+          } else {
+            Swal.fire("Error", "Failed to delete user", "error");
+          }
+        } catch (error) {
+          console.error(error);
+          Swal.fire("Error", "Failed to delete user", "error");
         }
       }
     });
@@ -50,7 +63,7 @@ const ManageUsers = () => {
     <div className="overflow-x-auto">
       <h2 className="text-2xl font-bold mb-4">Manage Users</h2>
       <table className="table w-full">
-        <thead>
+        <thead className="font-bold">
           <tr>
             <th>#</th>
             <th>Name & Email</th>
@@ -70,37 +83,45 @@ const ManageUsers = () => {
                 </div>
               </td>
               <td>
-                {user.role === 'fraud' ? (
+                {user.role === "fraud" ? (
                   <span className="text-red-600 font-bold">Fraud</span>
                 ) : (
-                  user.role
+                  user.role || "user"
                 )}
               </td>
               <td className="space-x-2">
-                {user.role !== 'admin' && user.role !== 'fraud' && (
+                {user.role !== "admin" && user.role !== "fraud" && (
                   <>
                     <button
-                      onClick={() => updateRole(user._id, 'make-admin')}
+                      onClick={() => updateRole(user._id, "admin")}
                       className="btn btn-sm"
-                    >Make Admin</button>
+                    >
+                      Make Admin
+                    </button>
                     <button
-                      onClick={() => updateRole(user._id, 'make-agent')}
+                      onClick={() => updateRole(user._id, "agent")}
                       className="btn btn-sm btn-info"
-                    >Make Agent</button>
+                    >
+                      Make Agent
+                    </button>
                   </>
                 )}
-                {user.role === 'agent' && (
+                {user.role === "agent" && (
                   <button
-                    onClick={() => updateRole(user._id, 'mark-fraud')}
+                    onClick={() => updateRole(user._id, "fraud")}
                     className="btn btn-sm btn-error"
-                  >Mark as Fraud</button>
+                  >
+                    Mark as Fraud
+                  </button>
                 )}
               </td>
               <td>
                 <button
                   onClick={() => handleDelete(user._id, user.email)}
                   className="btn btn-sm btn-outline btn-error"
-                >Delete</button>
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}

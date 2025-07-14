@@ -19,10 +19,12 @@ const DashboardLayout = () => {
       if (user?.email) {
         const res = await axiosSecure.get(`/users/${user.email}`);
         setRole(res.data?.role || '');
+        console.log('user role', res.data?.role)
       }
     };
     fetchRole();
   }, [user?.email, axiosSecure]);
+
 
   return (
     <div className="w-10/12 mx-auto">

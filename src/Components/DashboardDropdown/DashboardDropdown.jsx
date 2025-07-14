@@ -5,11 +5,11 @@ import { MdDashboard } from "react-icons/md";
 import { FaUserTie, FaUserShield, FaUser } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 import { NavLink } from "react-router";
-import useAuth from '../../hooks/useAuth';
+// import useAuth from '../../hooks/useAuth';
 
 const DashboardDropdown = () => {
 
-    const {user}=useAuth()
+    // const {user}=useAuth()
      
     return (
         <div className="dropdown dropdown-bottom">
@@ -18,29 +18,33 @@ const DashboardDropdown = () => {
                 Dashboard <IoIosArrowDown size={20}/>
             </div>
             <ul tabIndex={0} className="dropdown-content menu bg-[#868589] font-bold text-white rounded-box z-10 w-52 p-2 shadow">
-              {
-                user?.role === 'admin' && (
+              {/* {
+                user?.role === 'admin' && ( */}
                       <li>
                     <NavLink to="/dashboard/agent" className="flex items-center gap-2">
                         <FaUserTie /> Agent
                     </NavLink>
                 </li>
-                )
-              }
+                {/* ) */}
+              {/* } */}
+
+
                 <li>
                     <NavLink to="/dashboard/admin" className="flex items-center gap-2">
                         <FaUserShield /> Admin
                     </NavLink>
                 </li>
-               {
-                user?.role ==='user' && (
+
+
+               {/* {
+                user?.role ==='user' && ( */}
                      <li>
                     <NavLink to="/dashboard/user" className="flex items-center gap-2">
                         <FaUser /> User
                     </NavLink>
                 </li>
-                )
-               }
+                {/* ) */}
+               {/* } */}
             </ul>
         </div>
     );

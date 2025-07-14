@@ -12,6 +12,7 @@ const Login = () => {
     const { signInUser } = useAuth()
     const axiosIntance = useAxios()
 
+
     const from = location.state?.from || '/';
 
     const { register, handleSubmit, formState: { errors } } = useForm()
@@ -45,23 +46,50 @@ const Login = () => {
             })
     }
 
-    const handleSignIn = () => {
-        signInWithGoogle()
-            .then(result => {
-                console.log(result)
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Login Successful',
-                    text: 'Welcome to VistaLand!',
-                    timer: 2000,
-                    showConfirmButton: false
-                });
-                navigate(from)
-            }).catch(error => {
-                console.log(error)
-            })
-    }
+  const handleSignIn = () => {
+  signInWithGoogle()
+    .then(async (result) => {
+      const user = result.user;
 
+      const userInfo = {
+        name: user.displayName,
+        email: user.email,
+        photo: user.photoURL,
+        role: 'user',
+        isFirstLogin: true,
+        createdAt: new Date().toISOString()
+      };
+
+      try {
+        // ✅ Check if user exists
+        const res = await axiosIntance.get(`/users/${user.email}`);
+        if (!res.data || !res.data.email) {
+          // 🟢 User not found — insert
+          await axiosIntance.post('/users', userInfo);
+          console.log("✅ New Google user saved");
+        } else {
+          console.log("ℹ️ Google user already exists");
+        }
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Login Successful',
+          text: `Welcome, ${user.displayName}!`,
+          timer: 2000,
+          showConfirmButton: false
+        });
+
+        navigate(from);
+      } catch (err) {
+        console.error("❌ Failed to save Google user:", err);
+      }
+    })
+    .catch((error) => {
+      console.error("❌ Google Sign-in failed:", error);
+    });
+};
+
+    
 
 
     return (

@@ -33,7 +33,7 @@ const Navbar = () => {
 
 
     <li>
-      <NavLink to="/properties" className="flex items-center gap-1">
+      <NavLink to="/all-properties" className="flex items-center gap-1">
         <FaBuilding /> All Properties
       </NavLink>
     </li>

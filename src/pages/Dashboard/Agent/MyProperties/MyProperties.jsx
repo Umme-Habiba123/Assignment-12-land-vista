@@ -56,7 +56,7 @@ const MyProperties = () => {
             <h2 className="text-2xl font-semibold mb-4">My Added Properties</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {properties.map((property) => (
-                    <div key={property._id} className="border rounded-xl p-4 shadow-md">
+                    <div key={property._id} className="border border-gray-200 hover:shadow-amber-300 rounded-xl p-4 shadow-md">
                         <img
                             src={property.image}
                             alt={property.title}

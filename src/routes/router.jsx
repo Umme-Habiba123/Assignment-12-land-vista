@@ -10,13 +10,18 @@ import Login from "../pages/Authentication/Login/Login";
 import Registration from "../pages/Authentication/Registration/Registration";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../Layouts/DashboardLayout";
-// import AddProperty from "../pages/AgentDashboard/AddProperty/AddProperty";
 import AgentDashboard from "../pages/Dashboard/Agent/AgentDashboard";
 import AdminDashboard from "../pages/Dashboard/Admin/AdminDashboard";
-import UserDashboard from "../pages/Dashboard/User/UserDashboard";
 import AddProperty from "../pages/Dashboard/Agent/AddProperty/AddProperty";
 import MyProperties from "../pages/Dashboard/Agent/MyProperties/MyProperties";
 import UpdateProperty from "../pages/Dashboard/Agent/MyProperties/UpdateProperty/UpdateProperty";
+import UserDashboard from "../pages/Dashboard/UserDashboard/UserDashboard";
+import MyProfile from "../pages/Dashboard/UserDashboard/MyProfile/MyProfile";
+import AllProperties from "../pages/AllProperties/AllProperties";
+import AdminProfile from "../pages/Dashboard/Admin/AminProfile/AdminProfile";
+import ManageUsers from "../Components/ManageUser/ManageUser";
+import ManageProperties from "../pages/Dashboard/Admin/ManageProperties/ManageProperties";
+import LatestReviews from "../pages/HomePage/LatestReview/LatestReview";
 
 
 export const router = createBrowserRouter([
@@ -28,6 +33,12 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home
+      },
+      {
+        path: 'all-properties',
+        element: <PrivateRoute>
+          <AllProperties></AllProperties>
+        </PrivateRoute>
       },
 
     ]
@@ -74,12 +85,49 @@ export const router = createBrowserRouter([
 
       {
         path: 'admin',
-        Component: AdminDashboard
+        element: <PrivateRoute><AdminDashboard></AdminDashboard></PrivateRoute>,
+        children: [
+          {
+            index: true,
+            element: <AdminProfile />
+          },
+          {
+            path: "manage-users",
+            element: <ManageUsers></ManageUsers>
+          },
+          {
+            path: "manage-properties",
+            element: <ManageProperties></ManageProperties>
+          },
+          {
+            path: "manage-reviews",
+            element: <LatestReviews></LatestReviews>
+          },
+        ]
       },
       {
         path: 'user',
-        Component: UserDashboard
-      },
+        element: <PrivateRoute><UserDashboard /></PrivateRoute>,
+        children: [
+          {
+            path: 'my-profile',
+            element: <MyProfile></MyProfile>
+          },
+          // {
+          //   path: 'wishlist',
+          //   element: <Wishlist />
+          // },
+          // {
+          //   path: 'property-bought',
+          //   element: <PropertyBought />
+          // },
+          // {
+          //   path: 'my-reviews',
+          //   element: <MyReviews />
+          // }
+        ]
+      }
+
     ]
   }
 ]); 4

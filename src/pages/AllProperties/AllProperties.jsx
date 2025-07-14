@@ -26,9 +26,9 @@ const { data: properties = [],isLoading } = useQuery({
   return (
     <div className="max-w-7xl mx-auto p-6">
 
-     <button onClick={()=>navigate(-1)} className="btn px-5 mb-5 sansita-font text-lg"><FaArrowLeftLong /> Back to Previous</button>
+     <button onClick={()=>navigate(-1)} className="btn px-5 mb-5 sansita-font text-lg"><FaArrowLeftLong />   Back to Previous</button>
   
-      <h2 className="text-2xl font-bold mb-6 text-purple-700 flex gap-2">All Verified Properties</h2>
+      <h2 className="text-2xl font-bold mb-6 text-purple-700 flex gap-2"> All Verified Properties </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {properties.map((property) => (

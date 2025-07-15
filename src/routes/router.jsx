@@ -26,6 +26,7 @@ import AllPropertyDetails from "../pages/AllProperties/PropertyDetails/PropertyD
 import Wishlist from "../pages/Dashboard/UserDashboard/Wishlist/Wishlist";
 import PropertyBought from "../pages/Dashboard/UserDashboard/PropertyBrought/PropertyBrought";
 import MyReviews from "../pages/Dashboard/UserDashboard/MyReviews/MyReviews";
+import MakeAnOffer from "../pages/Dashboard/UserDashboard/MakeAnOffer/MakeAnOffer";
 
 
 export const router = createBrowserRouter([
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
         element: <PrivateRoute>
           <AllPropertyDetails></AllPropertyDetails>
         </PrivateRoute>
+      },
+      {
+        path: "/make-offer/:id",
+        element: <MakeAnOffer></MakeAnOffer>
       },
 
     ]

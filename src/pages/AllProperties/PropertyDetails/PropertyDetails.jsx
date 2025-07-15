@@ -83,7 +83,7 @@ const PropertyDetails = () => {
 <img
   src={property.image}
   alt={property.title}
-  style={{ width: "100%", height: "500px", objectFit: "cover", borderRadius: "8px" }}
+  style={{ width: "100%", height: "500px", objectFit: "cover", borderRadius: "8px"  }}
 />
 
 

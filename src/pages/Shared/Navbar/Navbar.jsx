@@ -37,11 +37,7 @@ const Navbar = () => {
         <FaBuilding /> All Properties
       </NavLink>
     </li>
-    <li>
-      <NavLink to="/all-property-details" className="flex items-center gap-1">
-        <FaBuilding /> All Property Details
-      </NavLink>
-    </li>
+
 
     {
       user && <>
@@ -55,6 +51,7 @@ const Navbar = () => {
 
   return (
     <div className='bg-[#D1D7E0] w-full shadow-md'>
+      <Navbar></Navbar>
       <div className="navbar w-10/12 mx-auto px-2 py-8 flex justify-between items-center">
 
         <div className="flex items-center gap-2">
@@ -64,14 +61,14 @@ const Navbar = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </label>
-            <ul tabIndex={0} className="dropdown-content menu menu-sm mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-sm text-gray-600">
+            <ul tabIndex={0} className="sansita-font dropdown-content menu menu-sm mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-sm text-gray-600">
               {links}
             </ul>
           </div>
           <VistaLand></VistaLand>
         </div>
         <div className="navbar-center hidden lg:flex dancing-script-font">
-          <ul className="menu menu-horizontal gap-4 px-1 text-lg">
+          <ul className="menu sansita-font menu-horizontal gap-4 px-1 text-lg">
 
             {links}
 

@@ -57,8 +57,8 @@ const { data: properties = [],isLoading } = useQuery({
               ✅ {property.verificationStatus}
             </p>
 
-            <p className="text-purple-600 font-semibold mt-1">
-              Price: ৳ {property.priceRange}
+            <p className="text-purple-600 font-bold mt-1 sansita-font">
+              ৳{property.minPrice} - ৳{property.maxPrice}
             </p>
 
             <button

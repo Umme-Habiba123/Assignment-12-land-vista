@@ -13,9 +13,9 @@ const PropertyDetails = () => {
   const queryClient = useQueryClient();
   const [showModal, setShowModal] = useState(false);
   const [reviewText, setReviewText] = useState("");
-   const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // ✅ Load property details
+  // Load property details
   const { data: property, isLoading } = useQuery({
     queryKey: ["property-details", id],
     queryFn: async () => {
@@ -24,7 +24,7 @@ const PropertyDetails = () => {
     },
   });
 
-  // ✅ Load reviews for this property
+  // Load reviews for this property
   const { data: reviews = [] } = useQuery({
     queryKey: ["reviews", id],
     queryFn: async () => {
@@ -33,7 +33,7 @@ const PropertyDetails = () => {
     },
   });
 
-  // ✅ Wishlist mutation
+  // Wishlist mutation with 409 error handling
   const wishlistMutation = useMutation({
     mutationFn: async () => {
       const wishlistData = {
@@ -46,12 +46,16 @@ const PropertyDetails = () => {
     onSuccess: () => {
       Swal.fire("Added!", "Property added to wishlist", "success");
     },
-    onError: () => {
-      Swal.fire("Error!", "Failed to add to wishlist", "error");
+    onError: (error) => {
+      if (error?.response?.status === 409) {
+        Swal.fire("Already Added", "This property is already in your wishlist", "info");
+      } else {
+        Swal.fire("Error!", "Failed to add to wishlist", "error");
+      }
     },
   });
 
-  // ✅ Review mutation
+  // Review mutation
   const reviewMutation = useMutation({
     mutationFn: async () => {
       const reviewData = {
@@ -78,15 +82,18 @@ const PropertyDetails = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-4 space-y-6">
-       <button onClick={()=>navigate(-1)} className="btn px-5 mb-5 sansita-font text-lg"><FaArrowLeftLong /> Back to Previous</button>
+      <button
+        onClick={() => navigate(-1)}
+        className="btn px-5 mb-5 sansita-font text-lg flex items-center gap-2"
+      >
+        <FaArrowLeftLong /> Back to Previous
+      </button>
 
-<img
-  src={property.image}
-  alt={property.title}
-  style={{ width: "100%", height: "500px", objectFit: "cover", borderRadius: "8px"  }}
-/>
-
-
+      <img
+        src={property.image}
+        alt={property.title}
+        style={{ width: "100%", height: "500px", objectFit: "cover", borderRadius: "8px" }}
+      />
 
       <h2 className="text-3xl font-bold">{property.title}</h2>
       <p className="text-gray-600">{property.description}</p>
@@ -114,7 +121,9 @@ const PropertyDetails = () => {
               <li key={review._id} className="border border-gray-300 p-2 rounded space-y-1">
                 <p className="font-semibold">{review.userName}</p>
                 <p className="text-gray-700">{review.review}</p>
-                <p className="text-sm text-gray-500">{new Date(review.reviewedAt).toLocaleString()}</p>
+                <p className="text-sm text-gray-500">
+                  {new Date(review.reviewedAt).toLocaleString()}
+                </p>
               </li>
             ))}
           </ul>
@@ -133,7 +142,7 @@ const PropertyDetails = () => {
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded p-6 w-full max-w-md">
-            <h3 className="text-2xl font-bold mb-4 sansita-font ">Write a Review</h3>
+            <h3 className="text-2xl font-bold mb-4 sansita-font">Write a Review</h3>
             <textarea
               className="w-full text-lg border-2 border-gray-300 focus:outline-none focus:border-purple-300  p-2 rounded"
               rows={4}

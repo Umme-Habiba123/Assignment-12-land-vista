@@ -7,8 +7,6 @@ import { MdDashboard } from 'react-icons/md';
 import VistaLand from '../ProjectLogo/VistaLand';
 // import { MdDashboard } from "react-icons/md";
 import { FaUserTie, FaUserShield, FaUser, } from "react-icons/fa";
-import { IoIosArrowDown } from 'react-icons/io';
-import DashboardLayout from '../../../Layouts/DashboardLayout';
 import DashboardDropdown from '../../../Components/DashboardDropdown/DashboardDropdown';
 
 
@@ -51,7 +49,7 @@ const Navbar = () => {
 
   return (
     <div className='bg-[#D1D7E0] w-full shadow-md'>
-      <Navbar></Navbar>
+     
       <div className="navbar w-10/12 mx-auto px-2 py-8 flex justify-between items-center">
 
         <div className="flex items-center gap-2">
@@ -128,8 +126,6 @@ const Navbar = () => {
               )
             }
           </div>
-
-
         </div>
       </div>
     </div>

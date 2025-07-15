@@ -23,6 +23,9 @@ import ManageUsers from "../Components/ManageUser/ManageUser";
 import ManageProperties from "../pages/Dashboard/Admin/ManageProperties/ManageProperties";
 import LatestReviews from "../pages/HomePage/LatestReview/LatestReview";
 import AllPropertyDetails from "../pages/AllProperties/PropertyDetails/PropertyDetails";
+import Wishlist from "../pages/Dashboard/UserDashboard/Wishlist/Wishlist";
+import PropertyBought from "../pages/Dashboard/UserDashboard/PropertyBrought/PropertyBrought";
+import MyReviews from "../pages/Dashboard/UserDashboard/MyReviews/MyReviews";
 
 
 export const router = createBrowserRouter([
@@ -120,18 +123,18 @@ export const router = createBrowserRouter([
             path: 'my-profile',
             element: <MyProfile></MyProfile>
           },
-          // {
-          //   path: 'wishlist',
-          //   element: <Wishlist />
-          // },
-          // {
-          //   path: 'property-bought',
-          //   element: <PropertyBought />
-          // },
-          // {
-          //   path: 'my-reviews',
-          //   element: <MyReviews />
-          // }
+          {
+            path: 'wishlist',
+            element: <Wishlist></Wishlist>
+          },
+          {
+            path: 'property-bought',
+            element: <PropertyBought />
+          },
+          {
+            path: 'my-reviews',
+            element: <MyReviews />
+          }
         ]
       }
 

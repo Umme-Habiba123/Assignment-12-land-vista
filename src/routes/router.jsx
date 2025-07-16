@@ -27,6 +27,9 @@ import Wishlist from "../pages/Dashboard/UserDashboard/Wishlist/Wishlist";
 import PropertyBought from "../pages/Dashboard/UserDashboard/PropertyBrought/PropertyBrought";
 import MyReviews from "../pages/Dashboard/UserDashboard/MyReviews/MyReviews";
 import MakeAnOffer from "../pages/Dashboard/UserDashboard/MakeAnOffer/MakeAnOffer";
+import AgentProfile from "../pages/Dashboard/Agent/AgentProfile/AgentProfile";
+import MySoldProperties from "../pages/Dashboard/Agent/MySoldProperties/MySoldProperties";
+import OfferedProperties from "../pages/Dashboard/Agent/offeredProperties/OfferedProperties";
 
 
 export const router = createBrowserRouter([
@@ -85,6 +88,10 @@ export const router = createBrowserRouter([
       },
 
       {
+        path: 'agent/profile',
+        element: <AgentProfile></AgentProfile>
+      },
+      {
         path: 'agent/addProperty',
         element: <AddProperty />
       },
@@ -95,6 +102,14 @@ export const router = createBrowserRouter([
       {
         path: 'agent/update-property/:id',
         element: <UpdateProperty></UpdateProperty>
+      },
+      {
+        path: 'agent/sold-properties',
+        element: <MySoldProperties></MySoldProperties>
+      },
+      {
+        path: 'agent/offered-properties',
+        element: <OfferedProperties></OfferedProperties>
       },
 
 
@@ -145,4 +160,4 @@ export const router = createBrowserRouter([
 
     ]
   }
-]); 4
+]); 

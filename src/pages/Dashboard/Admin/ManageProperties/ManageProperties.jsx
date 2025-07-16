@@ -1,128 +1,90 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+// pages/Dashboard/Admin/ManageProperties.jsx
+import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
+
 const ManageProperties = () => {
   const axiosSecure = useAxiosSecure();
-  const queryClient = useQueryClient();
 
-  // Get all properties
-  const { data: properties = [], isLoading } = useQuery({
+  const { data: properties = [], refetch, isLoading } = useQuery({
     queryKey: ["manage-properties"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/properties");
+      const res = await axiosSecure.get("/properties"); // সব properties
       return res.data;
     },
   });
 
-  // Verify mutation
-  const verifyMutation = useMutation({
-    mutationFn: async (id) => {
-      return await axiosSecure.patch(`/properties/verify/${id}`);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries(["manage-properties"]);
-      Swal.fire("Verified!", "Property has been verified.", "success");
-    },
-  });
-
-  // Reject mutation
-  const rejectMutation = useMutation({
-    mutationFn: async (id) => {
-      return await axiosSecure.patch(`/properties/reject/${id}`);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries(["manage-properties"]);
-      Swal.fire("Rejected", "Property has been rejected.", "info");
-    },
-  });
-
-  // Confirm before verifying
   const handleVerify = async (id) => {
-    const result = await Swal.fire({
-      title: "Are you sure?",
-      text: "Do you want to verify this property?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonText: "Yes, verify",
-      cancelButtonText: "No",
-    });
-    if (result.isConfirmed) {
-      verifyMutation.mutate(id);
+    try {
+      await axiosSecure.patch(`/admin/verify-property/${id}`);
+      Swal.fire("Success", "Property Verified!", "success");
+      refetch();
+    } catch (err) {
+       console.log(err)
+      Swal.fire("Error", "Verification Failed", "error");
     }
   };
 
-  // Confirm before rejecting
   const handleReject = async (id) => {
-    const result = await Swal.fire({
-      title: "Are you sure?",
-      text: "Do you want to reject this property?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, reject",
-      cancelButtonText: "No",
-    });
-    if (result.isConfirmed) {
-      rejectMutation.mutate(id);
+    try {
+      await axiosSecure.patch(`/admin/reject-property/${id}`);
+      Swal.fire("Rejected", "Property Rejected!", "info");
+      refetch();
+    } catch (err) {
+      console.log(err)
+      Swal.fire("Error", "Rejection Failed", "error");
     }
   };
 
-  if (isLoading)
-    return <div className="text-center py-10 text-red-600 text-2xl">Loading...</div>;
+  if (isLoading) return <p className="text-center mt-10 text-xl">Loading...</p>;
 
   return (
-    <div className="p-4 md:p-6">
-      <h2 className="text-2xl font-bold mb-4">Manage Properties</h2>
-
+    <div className="p-6">
+      <h2 className="text-2xl font-bold mb-6">Manage Properties</h2>
       <div className="overflow-x-auto">
-        <table className="w-full table-auto border border-gray-200 text-sm">
+        <table className="table-auto w-full border">
           <thead className="bg-gray-100">
             <tr>
-              <th className="p-2 border">Title</th>
-              <th className="p-2 border">Location</th>
-              <th className="p-2 border">Agent Name</th>
-              <th className="p-2 border">Agent Email</th>
-              <th className="p-2 border">Price Range</th>
-              <th className="p-2 border">Status</th>
-              <th className="p-2 border">Actions</th>
+              <th className="border px-4 py-2">Title</th>
+              <th className="border px-4 py-2">Location</th>
+              <th className="border px-4 py-2">Agent Name</th>
+              <th className="border px-4 py-2">Agent Email</th>
+              <th className="border px-4 py-2">Price Range</th>
+              <th className="border px-4 py-2">Action</th>
+              <th className="border px-4 py-2">Status</th>
             </tr>
           </thead>
           <tbody>
             {properties.map((property) => (
-              <tr key={property._id} className="text-center">
-                <td className="p-2 border">{property.title}</td>
-                <td className="p-2 border">{property.location}</td>
-                <td className="p-2 border">{property.agentName}</td>
-                <td className="p-2 border">{property.agentEmail}</td>
-                <td className="p-2 border">
-                  ৳{property.minPrice} - ৳{property.maxPrice}
-                </td>
-                <td className="p-2 border font-medium text-green-600">
-                  {property.verificationStatus === "verified"
-                    ? "Verified"
-                    : property.verificationStatus === "rejected"
-                    ? "Rejected"
-                    : "Pending"}
-                </td>
-                <td className="p-2 border">
+              <tr key={property._id}>
+                <td className="border px-4 py-2">{property.title}</td>
+                <td className="border px-4 py-2">{property.location}</td>
+                <td className="border px-4 py-2">{property.agentName}</td>
+                <td className="border px-4 py-2">{property.agentEmail}</td>
+                <td className="border px-4 py-2">৳{property.minPrice} - ৳{property.maxPrice}</td>
+                <td className="border px-4 py-2">
                   {property.verificationStatus === "pending" ? (
-                    <div className="flex flex-col md:flex-row gap-2 justify-center">
+                    <>
                       <button
                         onClick={() => handleVerify(property._id)}
-                        className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 transition"
+                        className="bg-green-600 text-white px-2 py-1 rounded mr-2"
                       >
                         Verify
                       </button>
                       <button
                         onClick={() => handleReject(property._id)}
-                        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
+                        className="bg-red-600 text-white px-2 py-1 rounded"
                       >
                         Reject
                       </button>
-                    </div>
+                    </>
                   ) : (
-                    <span className="text-gray-500">✔ {property.verificationStatus}</span>
+                    <span className="italic text-gray-500">Already {property.verificationStatus}</span>
                   )}
+                </td>
+                <td className="border px-4 py-2 capitalize font-semibold text-purple-700">
+                  {property.verificationStatus}
                 </td>
               </tr>
             ))}

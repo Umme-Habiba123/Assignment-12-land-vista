@@ -29,7 +29,7 @@ const UpdateProperty = () => {
     onSuccess: () => {
       queryClient.invalidateQueries(["myProperties"]);
       Swal.fire("Success", "Property updated successfully!", "success");
-      navigate("/my-properties");
+      navigate("/dashboard/agent/my-properties");
     },
     onError: () => {
       Swal.fire("Error", "Failed to update property.", "error");

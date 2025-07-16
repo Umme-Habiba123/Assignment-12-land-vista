@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-;
+
 
 const MySoldProperties = () => {
   const { user } = useAuth();
@@ -11,44 +11,56 @@ const MySoldProperties = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!user?.email) return;
-
-    axiosSecure.get(`/agent/sold-properties/${user.email}`)
-      .then(res => {
-        setSoldProperties(res.data);
-      })
-      .catch(err => {
-        console.error("Error fetching sold properties", err);
-      })
-      .finally(() => setLoading(false));
+    if (user?.email) {
+      axiosSecure
+        .get(`/sold-properties?agentEmail=${user.email}`)
+        .then((res) => {
+          setSoldProperties(res.data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error("Error fetching sold properties:", err);
+          setLoading(false);
+        });
+    }
   }, [user, axiosSecure]);
 
-  if (loading) return <p>Loading sold properties...</p>;
-  if (!soldProperties.length) return <p>No sold properties found.</p>;
+  if (loading) {
+    return <p className="text-center mt-10">Loading sold properties...</p>;
+  }
+
+  if (soldProperties.length === 0) {
+    return <p className="text-center mt-10">No sold properties found.</p>;
+  }
 
   return (
-    <table className="table-auto w-full border border-collapse">
-      <thead>
-        <tr>
-          <th className="border p-2">Title</th>
-          <th className="border p-2">Location</th>
-          <th className="border p-2">Buyer Email</th>
-          <th className="border p-2">Buyer Name</th>
-          <th className="border p-2">Sold Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        {soldProperties.map(({ _id, title, location, buyerEmail, buyerName, offerAmount }) => (
-          <tr key={_id}>
-            <td className="border p-2">{title}</td>
-            <td className="border p-2">{location}</td>
-            <td className="border p-2">{buyerEmail}</td>
-            <td className="border p-2">{buyerName}</td>
-            <td className="border p-2">৳{offerAmount}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div className="p-6">
+      <h2 className="text-3xl font-bold mb-6 text-center">My Sold Properties</h2>
+      <div className="overflow-x-auto">
+        <table className="table-auto w-full border-collapse border border-gray-300">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="border border-gray-300 px-4 py-2 text-left">Property Title</th>
+              <th className="border border-gray-300 px-4 py-2 text-left">Location</th>
+              <th className="border border-gray-300 px-4 py-2 text-left">Buyer Email</th>
+              <th className="border border-gray-300 px-4 py-2 text-left">Buyer Name</th>
+              <th className="border border-gray-300 px-4 py-2 text-left">Sold Price (৳)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {soldProperties.map((property) => (
+              <tr key={property._id} className="hover:bg-gray-50">
+                <td className="border border-gray-300 px-4 py-2">{property.title}</td>
+                <td className="border border-gray-300 px-4 py-2">{property.location}</td>
+                <td className="border border-gray-300 px-4 py-2">{property.buyerEmail}</td>
+                <td className="border border-gray-300 px-4 py-2">{property.buyerName}</td>
+                <td className="border border-gray-300 px-4 py-2">{property.soldPrice}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 };
 

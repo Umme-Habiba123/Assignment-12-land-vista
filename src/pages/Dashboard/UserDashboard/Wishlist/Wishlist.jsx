@@ -66,7 +66,7 @@ const Wishlist = () => {
         wishlist.map((property) => (
           <div
             key={property._id}
-            className="border border-purple-300 rounded-xl p-4 shadow-xl hover:shadow-purple-300"
+            className="border border-purple-300 rounded-xl p-4 shadow-lg hover:shadow-purple-300"
           >
             <img
               src={property.image}
@@ -106,6 +106,7 @@ const Wishlist = () => {
           </div>
         ))
       )}
+
     </div>
   );
 };

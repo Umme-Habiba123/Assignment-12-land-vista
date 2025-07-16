@@ -30,6 +30,7 @@ import MakeAnOffer from "../pages/Dashboard/UserDashboard/MakeAnOffer/MakeAnOffe
 import AgentProfile from "../pages/Dashboard/Agent/AgentProfile/AgentProfile";
 import MySoldProperties from "../pages/Dashboard/Agent/MySoldProperties/MySoldProperties";
 import OfferedProperties from "../pages/Dashboard/Agent/offeredProperties/OfferedProperties";
+import Pay from "../pages/Dashboard/UserDashboard/Pay/Pay";
 
 
 export const router = createBrowserRouter([
@@ -154,7 +155,11 @@ export const router = createBrowserRouter([
           {
             path: 'my-reviews',
             element: <MyReviews />
-          }
+          },
+          {
+            path: 'pay/:id',
+            element: <Pay></Pay>
+          },
         ]
       }
 

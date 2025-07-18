@@ -55,13 +55,14 @@ const PropertyDetails = () => {
     },
   });
 
-  // Review mutation
+  // Review mutation - with propertyTitle included
   const reviewMutation = useMutation({
     mutationFn: async () => {
       const reviewData = {
         propertyId: id,
         userEmail: user.email,
         userName: user.displayName,
+        propertyTitle: property.title,  // এখানে property title পাঠানো হচ্ছে
         review: reviewText,
         reviewedAt: new Date(),
       };

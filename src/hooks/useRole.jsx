@@ -19,6 +19,7 @@ const useRole = () => {
     axios.get(`http://localhost:5000/users/role/${user.email}`)
       .then(res => {
         setRole(res.data.role);
+         console.log('User Rolee :', res.data.role)
       })
       .catch(err => {
         console.error("Failed to fetch role", err);
@@ -26,6 +27,8 @@ const useRole = () => {
       })
       .finally(() => setLoading(false));
   }, [user]);
+
+ 
 
   return [role, loading];
 };

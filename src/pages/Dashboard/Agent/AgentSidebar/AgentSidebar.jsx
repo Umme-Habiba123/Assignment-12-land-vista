@@ -3,6 +3,7 @@ import {
   FaUserCircle, FaPlusCircle, FaClipboardList,
   FaCheckCircle, FaEnvelopeOpenText
 } from "react-icons/fa";
+import VistaLand from "../../../Shared/ProjectLogo/VistaLand";
 
 const AgentSidebar = () => {
   const linkStyle = ({ isActive }) =>
@@ -10,9 +11,10 @@ const AgentSidebar = () => {
 
   return (
     <div>
+     
       <h2 className="text-lg font-bold mb-4">Agent Dashboard</h2>
       <ul className="space-y-2">
-        <li><NavLink to="/dashboard/agent" className={linkStyle} end><FaUserCircle /> Profile</NavLink></li>
+        <li><NavLink to="/dashboard/agent/profile" className={linkStyle} end><FaUserCircle /> Profile</NavLink></li>
         <li><NavLink to="/dashboard/agent/addProperty" className={linkStyle}><FaPlusCircle /> Add Property</NavLink></li>
         <li><NavLink to="/dashboard/agent/my-properties" className={linkStyle}><FaClipboardList /> My Properties</NavLink></li>
         <li><NavLink to="/dashboard/agent/sold-properties" className={linkStyle}><FaCheckCircle /> Sold Properties</NavLink></li>

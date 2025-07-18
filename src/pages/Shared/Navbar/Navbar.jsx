@@ -2,11 +2,9 @@ import { NavLink } from 'react-router';
 import userPhoto from '../../../assets/user.png';
 import { AiFillHome } from "react-icons/ai";
 import useAuth from '../../../hooks/useAuth';
-import { FaBuilding } from 'react-icons/fa';
-import { MdDashboard } from 'react-icons/md';
+import { FaBuilding, FaPhone } from 'react-icons/fa';
 import VistaLand from '../ProjectLogo/VistaLand';
 // import { MdDashboard } from "react-icons/md";
-import { FaUserTie, FaUserShield, FaUser, } from "react-icons/fa";
 import DashboardDropdown from '../../../Components/DashboardDropdown/DashboardDropdown';
 
 
@@ -29,6 +27,12 @@ const Navbar = () => {
       </NavLink>
     </li>
 
+    <li>
+      <NavLink to="/contact" className="flex items-center gap-1">
+        <FaPhone /> Contact
+      </NavLink>
+    </li>
+
 
     <li>
       <NavLink to="/all-properties" className="flex items-center gap-1">
@@ -39,18 +43,18 @@ const Navbar = () => {
 
     {
       user && <>
-      <DashboardDropdown></DashboardDropdown>
-       
+        <DashboardDropdown></DashboardDropdown>
       </>
+
     }
 
 
   </>
 
   return (
-    <div className='bg-[#D1D7E0] w-full shadow-md'>
-     
-      <div className="navbar w-10/12 mx-auto px-2 py-8 flex justify-between items-center">
+    <div className='bg-[#D1D7E0] w-full shadow-md '>
+
+      <div className="navbar w-10/12 mx-auto px-2 py-8 flex justify-between items-center ">
 
         <div className="flex items-center gap-2">
           <div className="dropdown lg:hidden">

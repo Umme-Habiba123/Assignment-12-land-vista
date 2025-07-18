@@ -18,7 +18,7 @@ import UpdateProperty from "../pages/Dashboard/Agent/MyProperties/UpdateProperty
 import UserDashboard from "../pages/Dashboard/UserDashboard/UserDashboard";
 import MyProfile from "../pages/Dashboard/UserDashboard/MyProfile/MyProfile";
 import AllProperties from "../pages/AllProperties/AllProperties";
-import AdminProfile from "../pages/Dashboard/Admin/AminProfile/AdminProfile";
+
 import ManageUsers from "../Components/ManageUser/ManageUser";
 import ManageProperties from "../pages/Dashboard/Admin/ManageProperties/ManageProperties";
 import LatestReviews from "../pages/HomePage/LatestReview/LatestReview";
@@ -31,6 +31,13 @@ import AgentProfile from "../pages/Dashboard/Agent/AgentProfile/AgentProfile";
 import MySoldProperties from "../pages/Dashboard/Agent/MySoldProperties/MySoldProperties";
 import OfferedProperties from "../pages/Dashboard/Agent/offeredProperties/OfferedProperties";
 import Pay from "../pages/Dashboard/UserDashboard/Pay/Pay";
+import ManageReviews from "../pages/Dashboard/Admin/ManageReviews/ManageReviews";
+import AdvertiseProperty from "../pages/Dashboard/Admin/AdvertiseProperty/AdvertiseProperty";
+import AdminProfile from "../pages/Dashboard/Admin/AdminProfile/AdminProfile";
+
+
+
+
 
 
 export const router = createBrowserRouter([
@@ -108,9 +115,14 @@ export const router = createBrowserRouter([
         path: 'agent/sold-properties',
         element: <MySoldProperties></MySoldProperties>
       },
+      
       {
         path: 'agent/offered-properties',
         element: <OfferedProperties></OfferedProperties>
+      },
+      {
+        path:"/dashboard/admin/advertise-property",
+        element:<AdvertiseProperty></AdvertiseProperty>
       },
 
 
@@ -120,7 +132,7 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <AdminProfile />
+            element: <AdminProfile></AdminProfile>
           },
           {
             path: "manage-users",
@@ -132,7 +144,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "manage-reviews",
-            element: <LatestReviews></LatestReviews>
+            element: <ManageReviews></ManageReviews>
           },
         ]
       },

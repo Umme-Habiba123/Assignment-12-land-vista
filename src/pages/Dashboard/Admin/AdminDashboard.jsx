@@ -4,7 +4,7 @@ import AdminSidebar from "./AdminSidebar/AdminSidebar";
 const AdminDashboard = () => {
   return (
     <div className="flex min-h-screen">
-     <AdminSidebar></AdminSidebar>
+     {/* <AdminSidebar></AdminSidebar> */}
       <main className="flex-1 p-6">
         <Outlet />
       </main>

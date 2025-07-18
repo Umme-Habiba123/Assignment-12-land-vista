@@ -1,11 +1,15 @@
 // components/Sidebar/UserSidebar.jsx
 import { NavLink } from 'react-router'; 
 import { FaUser, FaHeart, FaStar, FaHouseUser } from 'react-icons/fa';
+import VistaLand from '../../../Shared/ProjectLogo/VistaLand';
 
 const UserSidebar = () => {
   return (
-    <>
-      <h2 className="text-xl font-bold text-purple-700 mb-4">User Dashboard</h2>
+   <div>
+   
+
+
+       <h2 className="text-xl font-bold text-purple-700 mb-4">User Dashboard</h2>
       <li>
         <NavLink to="/dashboard/user/my-profile">
           <FaUser /> My Profile
@@ -26,7 +30,7 @@ const UserSidebar = () => {
           <FaStar /> My Reviews
         </NavLink>
       </li>
-    </>
+   </div>
   );
 };
 

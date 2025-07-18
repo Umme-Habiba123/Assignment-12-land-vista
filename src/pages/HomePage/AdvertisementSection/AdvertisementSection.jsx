@@ -1,76 +1,56 @@
-// src/components/Advertisement.jsx
-import { Link } from "react-router";
-import { FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
-
-const mockData = [
-  {
-    id: "1",
-    image: "https://i.ibb.co/MxG72xY2/gulshan.webp",
-    location: "Gulshan, Dhaka",
-    price: "৳ 80 Lac – ৳ 1.2 Cr",
-    verified: true,
-  },
-  {
-    id: "2",
-    image: "https://i.ibb.co/nMkDwYRQ/dhanmondi.webp",
-    location: "Dhanmondi, Dhaka",
-    price: "৳ 60 Lac – ৳ 90 Lac",
-    verified: true,
-  },
-  {
-    id: "3",
-    image: "https://i.ibb.co/sp2w0dFL/uttara.jpg",
-    location: "Uttara, Dhaka",
-    price: "৳ 50 Lac – ৳ 70 Lac",
-    verified: false,
-  },
-  {
-    id: "4",
-    image: "https://i.ibb.co/sp98mjjz/bashundhara.webp",
-    location: "Bashundhara, Dhaka",
-    price: "৳ 75 Lac – ৳ 95 Lac",
-    verified: true,
-  },
-];
+import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router";
+import { motion } from "framer-motion";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const AdvertisementSection = () => {
-  return (
-    <section className="max-w-7xl mx-auto px-4 py-10 ">
-      <h2 className="text-3xl font-bold text-center mb-8 text-[#4C495D]">Featured Properties</h2>
+  const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
-      <div data-aos="fade-right" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {mockData.map((property) => (
-          <div key={property.id} className="bg-white shadow-xl hover:shadow-amber-200 rounded-lg overflow-hidden border border-gray-200 ">
+  const { data: properties = [] } = useQuery({
+    queryKey: ["advertised-properties"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/properties?isAdvertised=true&status=verified");
+      return res.data.slice(0, 4);
+    },
+  });
+
+  return (
+    <div className="max-w-7xl mx-auto px-4 py-10">
+      <h2 className="text-2xl md:text-3xl font-bold text-purple-700 mb-8 text-center">
+        Advertisement Section
+      </h2>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {properties.map((property, index) => (
+          <motion.div
+            key={property._id}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.2, ease: "easeOut" }}
+            whileHover={{ scale: 1.05, boxShadow: "0 8px 20px rgba(255, 193, 7, 0.6)" }}
+            className="bg-white rounded-xl shadow-lg p-4 border border-gray-100 cursor-pointer"
+            onClick={() => navigate(`/property-details/${property._id}`)}
+          >
             <img
               src={property.image}
-              alt={property.location}
-              className="w-full h-48 object-cover"
+              alt={property.title}
+              className="h-40 w-full object-cover rounded-lg"
             />
-            <div data-aos="fade-left" className="p-4 space-y-2">
-              <h3 className="text-lg font-semibold flex items-center gap-2 text-[#2D283E]">
-                <FaMapMarkerAlt className="text-[#802BB1]" /> {property.location}
-              </h3>
-              <p className="text-sm text-[#4C495D]">Price: {property.price}</p>
+            <h3 className="text-lg font-semibold mt-3">{property.title}</h3>
+            <p className="text-sm text-gray-600">{property.location}</p>
 
-              <p className="text-sm flex items-center gap-2">
-                Verification:
-                {property.verified ? (
-                  <span className="text-green-600 flex items-center gap-1">
-                    <FaCheckCircle /> Verified
-                  </span>
-                ) : (
-                  <span className="text-red-500">Not Verified</span>
-                )}
-              </p>
+            <p className="mt-1 text-xs text-green-600 font-medium">
+              ✅ {property.verificationStatus}
+            </p>
 
-              <Link to={`/properties/${property.id}`}>
-                <button className="btn btn-sm bg-[#802BB1] text-white hover:bg-[#2D283E] mt-2">View Details</button>
-              </Link>
-            </div>
-          </div>
+            <p className="text-purple-600 font-bold mt-1">
+              ৳{property.minPrice} - ৳{property.maxPrice}
+            </p>
+          </motion.div>
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

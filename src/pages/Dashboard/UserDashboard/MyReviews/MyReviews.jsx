@@ -9,7 +9,7 @@ const MyReviews = () => {
 
   const { data: reviews = [], refetch } = useQuery({
     queryKey: ['my-reviews', user?.email],
-    enabled: !!user?.email, // ইউজার ইমেইল থাকলে কল হবে
+    enabled: !!user?.email, 
     queryFn: async () => {
       const res = await axiosSecure.get(`/reviews/user?email=${user.email}`);
       return res.data;

@@ -4,6 +4,7 @@ import moment from "moment";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
+
 const AgentProfile = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
@@ -38,26 +39,28 @@ const AgentProfile = () => {
   }
 
   return (
-    <div className="max-w-xl mx-auto mt-10 bg-white p-6 shadow-lg rounded-xl">
-      <h2 className="text-2xl font-bold text-center mb-6">
-        Agent Profile <ShieldCheck className="inline-block text-green-600 ml-2" />
-      </h2>
+    <div className="min-h-[80vh] flex justify-center items-center bg-gradient-to-br  px-4 py-10 ">
+      <div className="w-full max-w-2xl bg-white shadow-2xl rounded-3xl p-8 transition-all duration-300 hover:shadow-purple-300 ">
+        <h2 className="text-3xl font-bold text-center text-purple-700 mb-8">
+          Agent Profile <ShieldCheck className="inline-block text-green-600 ml-2" />
+        </h2>
 
-      <div className="flex flex-col items-center text-center gap-4">
-        <img
-          src={user.photoURL || "https://i.ibb.co/y0qFqkt/default-user.png"}
-          alt="Agent"
-          className="w-32 h-32 rounded-full object-cover border-4 border-purple-300"
-        />
-        <div>
-          <h3 className="text-xl font-semibold">{user.displayName}</h3>
-          <p className="text-gray-600">{user.email}</p>
-          <p className="text-purple-600 font-medium">Role: {role}</p>
-          {userInfo?.createdAt && (
-            <p className="text-sm text-gray-500">
-              Joined: {moment(userInfo.createdAt).format("YYYY-MM-DD")}
-            </p>
-          )}
+        <div className="flex flex-col items-center gap-6 text-center">
+          <img
+            src={user.photoURL || "https://i.ibb.co/y0qFqkt/default-user.png"}
+            alt="Agent"
+            className="w-36 h-36 sm:w-40 sm:h-40 rounded-full object-cover border-4 border-purple-400 shadow-lg"
+          />
+          <div>
+            <h3 className="text-2xl font-semibold text-gray-800">{user.displayName}</h3>
+            <p className="text-gray-600">{user.email}</p>
+            <p className="text-purple-600 font-medium mt-2">Role: {role}</p>
+            {userInfo?.createdAt && (
+              <p className="text-sm text-gray-500 mt-1">
+                Joined: {moment(userInfo.createdAt).format("MMMM D, YYYY")}
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </div>

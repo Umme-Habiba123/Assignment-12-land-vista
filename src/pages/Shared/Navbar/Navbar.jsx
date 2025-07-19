@@ -85,6 +85,7 @@ const Navbar = () => {
               src={user?.photoURL || userPhoto}
               alt="User"
             />
+
             {
               user?.displayName &&
               <div>

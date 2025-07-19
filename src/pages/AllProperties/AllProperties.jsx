@@ -58,7 +58,7 @@ const AllProperties = () => {
         className="input input-bordered mb-3 w-full max-w-md mx-auto block text-center text-lg placeholder:text-gray-400 rounded-lg shadow-md"
       />
 
-      {/* Sort Dropdown - Search input এর ঠিক নিচে */}
+   
       <div className="mb-6 max-w-md mx-auto">
         <select
           value={sortOrder}

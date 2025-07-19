@@ -58,7 +58,7 @@ const AdvertiseProperty = () => {
                     <span className="text-green-600 font-medium">Advertised</span>
                   ) : (
                     <button
-                      className="btn btn-sm btn-primary"
+                      className="btn btn-sm bg-gray-700 text-white hover:text-black hover:bg-gray-400"
                       onClick={() => advertiseMutation.mutate(property._id)}
                     >
                       Advertise

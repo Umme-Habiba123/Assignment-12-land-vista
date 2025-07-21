@@ -11,8 +11,7 @@ const Registration = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
     const { createUser, updateUserProfile, signInWithGoogle } = useAuth();
     const [profilePic, setProfilePic] = useState('');
-    const axiosInstance = useAxios();
-
+    const axiosInstance = useAxios()
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from || '/';
@@ -34,6 +33,7 @@ const Registration = () => {
                     isFirstLogin: true,
                     createdAt: new Date().toISOString()
                 };
+
                 const userProfile = {
                     displayName: data.name,
                     photoURL: profilePic

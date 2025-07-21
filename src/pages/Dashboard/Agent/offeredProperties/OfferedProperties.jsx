@@ -7,7 +7,7 @@ const OfferedProperties = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
-  // Fetch offers for agent
+
   const {
     data: offers = [],
     isLoading,
@@ -20,7 +20,7 @@ const OfferedProperties = () => {
     },
   });
 
-  // Accept Offer Handler
+ 
   const handleAccept = async (offerId) => {
     try {
       const res = await axiosSecure.patch(`/agent/accept-offer/${offerId}`);

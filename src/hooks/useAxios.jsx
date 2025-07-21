@@ -1,11 +1,12 @@
-// hooks/useAxiosSecure.js
-import axios from "axios";
+import axios from 'axios';
+import React from 'react';
 
-const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
-  // headers: { authorization: `Bearer ${token}` }, // চাইলে auth header add করো
-});
+const axiosSecure=axios.create({
+    baseURL: `http://localhost:5000`
+})
 
-export default function useAxiosSecure() {
-  return axiosSecure;
-}
+const useAxios = () => {
+    return axiosSecure
+};
+
+export default useAxios;

@@ -4,6 +4,7 @@ import { FaUserTie, FaUserShield, FaUser } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 import { NavLink } from "react-router"; // react-router-dom হওয়া উচিত
 import useRole from "../../hooks/useRole";
+import { Helmet } from "react-helmet";
 
 
 const DashboardDropdown = () => {
@@ -33,6 +34,10 @@ const DashboardDropdown = () => {
 
   return (
     <div className="dropdown dropdown-bottom sansita-font">
+      <Helmet>
+        <title>Dashboard | LandVista</title>
+        <meta name="description" content="Nested component" />
+      </Helmet>
       <div tabIndex={0} role="button" className="m-1 flex items-center gap-1 cursor-pointer">
         <MdDashboard />
         Dashboard <IoIosArrowDown size={20} />
@@ -50,7 +55,7 @@ const DashboardDropdown = () => {
             </NavLink>
           </li>
         ) : (
-          <li className="text-gray-300">No dashboard available</li>
+          <li className="text-black">No dashboard available</li>
         )}
       </ul>
     </div>

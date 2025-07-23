@@ -8,7 +8,7 @@ import useAuth from "../../../../hooks/useAuth";
 
 const AgentProfile = () => {
   const { user } = useAuth();
-  const axiosSecure = useAxiosSecure();
+  const axiosInstance = useAxiosSecure();
   const [role, setRole] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -20,14 +20,14 @@ const AgentProfile = () => {
   useEffect(() => {
     const fetchRole = async () => {
       if (user?.email) {
-        const res = await axiosSecure.get(`/users/role/${user.email}`);
+        const res = await axiosInstance.get(`/users/role/${user.email}`);
         setRole(res.data?.role);
       }
     };
 
     const fetchUserInfo = async () => {
       if (user?.email) {
-        const res = await axiosSecure.get(`/users/${user.email}`);
+        const res = await axiosInstance.get(`/users/${user.email}`);
         setUserInfo(res.data);
         setFormData({
           displayName: res.data?.displayName || "",
@@ -38,7 +38,7 @@ const AgentProfile = () => {
 
     fetchRole();
     fetchUserInfo();
-  }, [user, axiosSecure]);
+  }, [user, axiosInstance]);
 
   const handleEditClick = () => {
     setIsEditModalOpen(true);
@@ -51,7 +51,7 @@ const AgentProfile = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const res = await axiosSecure.patch(`/users/${user.email}`, {
+      const res = await axiosInstance.patch(`/users/${user.email}`, {
         displayName: formData.displayName,
         photoURL: formData.photoURL,
       });
@@ -71,7 +71,7 @@ const AgentProfile = () => {
   if (!role || role === "user") {
     return (
       <p className="text-center text-red-500 mt-10 text-xl">
-        This page is for Agents only 🔒
+        This page is for Agents only 
       </p>
     );
   }

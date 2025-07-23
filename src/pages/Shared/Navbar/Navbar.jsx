@@ -1,11 +1,11 @@
 import { NavLink } from 'react-router';
 import userPhoto from '../../../assets/user.png';
 import { AiFillHome } from "react-icons/ai";
-import useAuth from '../../../hooks/useAuth';
 import { FaBuilding, FaPhone } from 'react-icons/fa';
 import VistaLand from '../ProjectLogo/VistaLand';
 // import { MdDashboard } from "react-icons/md";
 import DashboardDropdown from '../../../Components/DashboardDropdown/DashboardDropdown';
+import useAuth from '../../../hooks/useAuth';
 
 
 const Navbar = () => {
@@ -69,8 +69,8 @@ const Navbar = () => {
           </div>
           <VistaLand></VistaLand>
         </div>
-        <div className="navbar-center hidden lg:flex dancing-script-font">
-          <ul className="menu sansita-font menu-horizontal gap-4 px-1 text-lg">
+        <div className="navbar-center hidden lg:flex dancing-script-font ">
+          <ul className="menu sansita-font menu-horizontal gap-4 px-1 text-lg ">
 
             {links}
 

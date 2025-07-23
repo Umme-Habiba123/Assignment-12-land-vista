@@ -9,16 +9,17 @@ const MyProfile = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [formData, setFormData] = useState({
-    displayName: "",
+    name: "",
     photoURL: "",
   });
+  
 
   useEffect(() => {
     if (user?.email) {
       axiosSecure.get(`/users/${user.email}`).then((res) => {
         setUserInfo(res.data);
         setFormData({
-          displayName: res.data?.displayName || "",
+          name: res.data?.name || "",
           photoURL: res.data?.photoURL || "",
         });
       });
@@ -33,7 +34,7 @@ const MyProfile = () => {
     e.preventDefault();
     try {
       const res = await axiosSecure.patch(`/users/${user.email}`, {
-        displayName: formData.displayName,
+       name: formData.name,
         photoURL: formData.photoURL,
       });
       if (res.data.modifiedCount > 0) {
@@ -43,6 +44,11 @@ const MyProfile = () => {
       console.error("Failed to update user:", err);
     }
   };
+
+  console.log("createdAt:", userInfo?.createdAt);
+  console.log("userInfo:", userInfo);
+
+
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-xl shadow-md text-center relative">
@@ -59,9 +65,11 @@ const MyProfile = () => {
         alt="User"
         className="w-28 h-28 rounded-full mx-auto mb-4 border-4 border-purple-300"
       />
+
       <h2 className="text-xl font-bold mb-2">
-        {userInfo?.displayName || "Unknown User"}
+        {userInfo?.name || "Unknown User"}
       </h2>
+
       <p className="text-gray-600">
         <span className="font-bold">Email:</span> {user?.email}
       </p>
@@ -80,7 +88,9 @@ const MyProfile = () => {
       <p className="text-sm mt-4 text-gray-600">
         <span className="font-bold">Joined:</span>{" "}
         {userInfo?.createdAt?.split("T")[0] || "N/A"}
+        
       </p>
+      
 
       {/* Edit Modal */}
       {isEditModalOpen && (
@@ -94,8 +104,8 @@ const MyProfile = () => {
                 <label className="block mb-1 font-medium text-gray-700">Name</label>
                 <input
                   type="text"
-                  name="displayName"
-                  value={formData.displayName}
+                  name="name"
+                  value={formData.name}
                   onChange={handleInputChange}
                   className="w-full border px-3 py-2 rounded focus:outline-purple-500"
                 />

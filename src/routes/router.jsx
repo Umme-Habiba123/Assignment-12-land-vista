@@ -18,7 +18,6 @@ import UpdateProperty from "../pages/Dashboard/Agent/MyProperties/UpdateProperty
 import UserDashboard from "../pages/Dashboard/UserDashboard/UserDashboard";
 import MyProfile from "../pages/Dashboard/UserDashboard/MyProfile/MyProfile";
 import AllProperties from "../pages/AllProperties/AllProperties";
-
 import ManageUsers from "../Components/ManageUser/ManageUser";
 import ManageProperties from "../pages/Dashboard/Admin/ManageProperties/ManageProperties";
 import LatestReviews from "../pages/HomePage/LatestReview/LatestReview";
@@ -34,10 +33,7 @@ import Pay from "../pages/Dashboard/UserDashboard/Pay/Pay";
 import ManageReviews from "../pages/Dashboard/Admin/ManageReviews/ManageReviews";
 import AdvertiseProperty from "../pages/Dashboard/Admin/AdvertiseProperty/AdvertiseProperty";
 import AdminProfile from "../pages/Dashboard/Admin/AdminProfile/AdminProfile";
-
-
-
-
+import Forbidden from "../pages/Authentication/Forbidden/Forbidden";
 
 
 export const router = createBrowserRouter([
@@ -78,8 +74,8 @@ export const router = createBrowserRouter([
         Component: Login
       },
       {
-        path: 'registration',
-        Component: Registration
+        path: 'forbidden',
+        Component: Forbidden
       },
     ]
   },

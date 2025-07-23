@@ -1,57 +1,49 @@
-import axios from 'axios';
-import { useEffect } from 'react';
-import useAuth from './useAuth';
-import { useNavigate } from 'react-router';
+// useAxiosSecure.jsx
+import { useEffect } from "react";
+import { getAuth } from "firebase/auth";
+import { useNavigate } from "react-router";
+import useAuth from "./useAuth";
+import useAxios from "./useAxios";
 
-const axiosSecure = axios.create({
-  baseURL: 'http://localhost:5000',
-});
 
 const useAxiosSecure = () => {
-  const { user, logOut } = useAuth();
+  const { logOut } = useAuth();
   const navigate = useNavigate();
+  const auth = getAuth();
+  const axiosSecure=useAxios()
 
   useEffect(() => {
-    // Request interceptor
     const requestInterceptor = axiosSecure.interceptors.request.use(
-      (config) => {
-        if (user?.accessToken) {
-          config.headers.Authorization = `Bearer ${user.accessToken}`;
+      async (config) => {
+        const user = auth.currentUser;
+        if (user) {
+          const token = await user.getIdToken();
+          config.headers.authorization = `Bearer ${token}`;
         }
         return config;
       },
       (error) => Promise.reject(error)
     );
 
-    // Response interceptor
     const responseInterceptor = axiosSecure.interceptors.response.use(
       (response) => response,
       async (error) => {
         const status = error.response?.status;
-
-        console.log('🔁 inside response interceptor:', status);
-
-        // if (status === 403) {
-        //   navigate('/forbidden');
-        // } else if (status === 401) {
-        //   try {
-        //     await logOut();
-        //     navigate('/login');
-        //   } catch (logoutError) {
-        //     console.error('❌ Logout failed:', logoutError);
-        //   }
-        // }
-
+        if (status === 401) {
+          await logOut();
+          navigate("/login");
+        } else if (status === 403) {
+          navigate("/forbidden");
+        }
         return Promise.reject(error);
       }
     );
 
-    // Cleanup
     return () => {
       axiosSecure.interceptors.request.eject(requestInterceptor);
       axiosSecure.interceptors.response.eject(responseInterceptor);
     };
-  }, [user, logOut, navigate]);
+  }, [logOut, navigate]);
 
   return axiosSecure;
 };

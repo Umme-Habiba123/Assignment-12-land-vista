@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FaArrowLeftLong } from "react-icons/fa6";
+import { Helmet } from "react-helmet";
 
 const AllProperties = () => {
   const axiosSecure = useAxiosSecure();
@@ -38,6 +39,11 @@ const AllProperties = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
+
+      <Helmet>
+        <title>ALlProperties | LandVista</title>
+        <meta name="description" content="Nested component" />
+      </Helmet>
       <button
         onClick={() => navigate(-1)}
         className="btn px-5 mb-5 sansita-font text-lg flex items-center gap-2"
@@ -58,7 +64,7 @@ const AllProperties = () => {
         className="input input-bordered mb-3 w-full max-w-md mx-auto block text-center text-lg placeholder:text-gray-400 rounded-lg shadow-md"
       />
 
-   
+
       <div className="mb-6 max-w-md mx-auto">
         <select
           value={sortOrder}

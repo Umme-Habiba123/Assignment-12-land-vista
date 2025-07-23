@@ -18,10 +18,10 @@ const Login = () => {
   const onSubmit = data => {
     signIn(data.email, data.password)
    .then(async (result) => {
-  const loggedUser = result.user; // ✅ এভাবে ইউজার পাও
+  const loggedUser = result.user; 
 
   const userInfo = {
-    email: loggedUser.email,   // 🔄 আগে user.email ছিল, এখন fixed
+    email: loggedUser.email,  
     role: 'user',
     created_at: new Date().toISOString(),
     last_log_in: new Date().toISOString()
@@ -39,6 +39,9 @@ const Login = () => {
       .then(async (result) => {
         const user = result.user;
 
+        const token =await user.getIdToken()
+        localStorage.setItem('token', token)
+
         const userInfo = {
           name: user.displayName,
           email: user.email,
@@ -50,17 +53,17 @@ const Login = () => {
 
         try {
           await axiosIntance.get(`/users/${encodeURIComponent(user.email)}`);
-          console.log("ℹ️ Google user already exists");
+          console.log(" Google user already exists");
         } catch (err) {
           if (err.response?.status === 404) {
             try {
               await axiosIntance.post('/users', userInfo);
-              console.log("✅ New Google user saved");
+              console.log("New Google user saved");
             } catch (postErr) {
-              console.error("❌ Failed to save new user:", postErr);
+              console.error("Failed to save new user:", postErr);
             }
           } else {
-            console.error("❌ Error checking user:", err);
+            console.error(" Error checking user:", err);
           }
         }
 
@@ -75,7 +78,7 @@ const Login = () => {
         navigate(from);
       })
       .catch((error) => {
-        console.error("❌ Google Sign-in failed:", error);
+        console.error(" Google Sign-in failed:", error);
       });
   };
 

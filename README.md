@@ -1,6 +1,6 @@
 # 🌐 LandVista - Real Estate Property Management
 
-**Live Website URL:** [([[[https://landvista-realestate.web.app](https://gilded-dolphin-31e21d.netlify.app/](https://gilded-dolphin-31e21d.netlify.app/](https://gilded-dolphin-31e21d.netlify.app/))))
+**Live Website URL:** https://gilded-dolphin-31e21d.netlify.app/
 
 
 ---

@@ -34,6 +34,9 @@ import ManageReviews from "../pages/Dashboard/Admin/ManageReviews/ManageReviews"
 import AdvertiseProperty from "../pages/Dashboard/Admin/AdvertiseProperty/AdvertiseProperty";
 import AdminProfile from "../pages/Dashboard/Admin/AdminProfile/AdminProfile";
 import Forbidden from "../pages/Authentication/Forbidden/Forbidden";
+import Profile from "../pages/Profile/Profile";
+import NewsDetail from "../pages/HomePage/NewsSection/NewsDetails/NewsDetails";
+import Contact from "../pages/Contact/Contact";
 
 
 export const router = createBrowserRouter([
@@ -61,6 +64,18 @@ export const router = createBrowserRouter([
       {
         path: "/make-offer/:id",
         element: <MakeAnOffer></MakeAnOffer>
+      },
+      {
+        path: "/profile",
+        element: <Profile></Profile>
+      },
+      {
+        path: "/news/:id",
+        element: <NewsDetail></NewsDetail>
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>
       },
 
     ]

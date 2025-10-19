@@ -3,6 +3,7 @@ import userPhoto from '../../../assets/user.png';
 import { AiFillHome } from "react-icons/ai";
 import { FaBuilding, FaPhone } from 'react-icons/fa';
 import VistaLand from '../ProjectLogo/VistaLand';
+import { GiEgyptianProfile } from "react-icons/gi";
 // import { MdDashboard } from "react-icons/md";
 import DashboardDropdown from '../../../Components/DashboardDropdown/DashboardDropdown';
 import useAuth from '../../../hooks/useAuth';
@@ -28,10 +29,11 @@ const Navbar = () => {
     </li>
 
     <li>
-      <NavLink to="/contact" className="flex items-center gap-1">
-        <FaPhone /> Contact
+      <NavLink to="/profile" className="flex items-center gap-1 text-xl">
+        <GiEgyptianProfile size={25} /> Profile
       </NavLink>
     </li>
+
 
 
     <li>
@@ -44,7 +46,14 @@ const Navbar = () => {
     {
       user && <>
         <DashboardDropdown></DashboardDropdown>
+        <li>
+          <NavLink to="/contact" className="flex items-center gap-1">
+            <FaPhone /> Contact
+          </NavLink>
+        </li>
       </>
+
+
 
     }
 
@@ -52,7 +61,7 @@ const Navbar = () => {
   </>
 
   return (
-    <div className='bg-[#D1D7E0] w-full shadow-md '>
+    <div className='bg-[#D1D7E0] w-full shadow-md sticky z-50 top-0'>
 
       <div className="navbar w-10/12 mx-auto px-2 py-8 flex justify-between items-center ">
 

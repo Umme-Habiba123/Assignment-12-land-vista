@@ -1,37 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
 import useAxios from '../../../hooks/useAxios';
 import Swal from 'sweetalert2';
 import VistaLand from '../../Shared/ProjectLogo/VistaLand';
+import { IoEyeOutline } from 'react-icons/io5';
+import { LuEyeClosed } from 'react-icons/lu';
 
 const Login = () => {
-  const { signInWithGoogle,  signIn } = useAuth();
+  const { signInWithGoogle, signIn } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const axiosIntance = useAxios();
+      const [showPassword, setShowPassword] = useState(false)
+
+      const toggleShow = () => {
+        setShowPassword((prev) => !prev)
+    }
 
   const from = location.state?.from || '/';
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = data => {
     signIn(data.email, data.password)
-   .then(async (result) => {
-  const loggedUser = result.user; 
+      .then(async (result) => {
+        const loggedUser = result.user;
 
-  const userInfo = {
-    email: loggedUser.email,  
-    role: 'user',
-    created_at: new Date().toISOString(),
-    last_log_in: new Date().toISOString()
-  };
+        const userInfo = {
+          email: loggedUser.email,
+          role: 'user',
+          created_at: new Date().toISOString(),
+          last_log_in: new Date().toISOString()
+        };
 
-  const res = await axiosIntance.post('/users', userInfo);
-  console.log('user update info', res.data);
+        const res = await axiosIntance.post('/users', userInfo);
+        console.log('user update info', res.data);
 
-  navigate(from);
-})
+        navigate(from);
+      })
   };
 
   const handleSignIn = () => {
@@ -39,7 +46,7 @@ const Login = () => {
       .then(async (result) => {
         const user = result.user;
 
-        const token =await user.getIdToken()
+        const token = await user.getIdToken()
         localStorage.setItem('token', token)
 
         const userInfo = {
@@ -107,7 +114,7 @@ const Login = () => {
             </div>
 
             {/* Password */}
-            <div>
+            <div className='relative'>
               <label className="label">Password</label>
               <input
                 {...register('password', {
@@ -115,10 +122,18 @@ const Login = () => {
                   minLength: 6,
                   maxLength: 20
                 })}
-                type="password"
+                 type={showPassword ? 'text' : 'password'}
                 className="input w-full border px-3 py-2 rounded-md"
                 placeholder="Password"
               />
+
+
+              <button type='button absolute'
+                className='absolute  lg:mt-1 right-4 cursor-pointer absolute'
+                onClick={toggleShow}>
+
+                {showPassword ? <IoEyeOutline size={23} /> : <LuEyeClosed size={23} />}
+              </button>
               {errors.password?.type === 'required' && (
                 <p className="text-red-500 text-sm mt-1">Password is required</p>
               )}

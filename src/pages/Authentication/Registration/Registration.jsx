@@ -14,7 +14,7 @@ const Registration = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
     const { createUser, updateUserProfile, signInWithGoogle } = useAuth();
     const [showPassword, setShowPassword] = useState(false)
-      const [showConfirm, setShowConfirm] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
     // const [password, setPassword] = useState('')
     const [profilePic, setProfilePic] = useState('');
     const axiosInstance = useAxios()
@@ -26,6 +26,7 @@ const Registration = () => {
     const toggleShow = () => {
         setShowPassword((prev) => !prev)
     }
+    
     const onSubmit = data => {
         createUser(data.email, data.password)
             .then(async () => {
@@ -151,17 +152,17 @@ const Registration = () => {
                                         message: 'Must include capital & special char'
                                     }
                                 })}
-                                type={showPassword ? 'text': 'password'}
+                                type={showPassword ? 'text' : 'password'}
                                 className="input input-bordered w-full"
                                 placeholder="Create a password"
                             />
 
                             <button type='button'
-                            className='absolute  lg:mt-1 right-4 cursor-pointer'
-                            onClick={toggleShow}>
-                                
-                                {showPassword? <IoEyeOutline size={23}/> :<LuEyeClosed size={23}/>}
-                               </button>
+                                className='absolute  lg:mt-1 right-4 cursor-pointer'
+                                onClick={toggleShow}>
+
+                                {showPassword ? <IoEyeOutline size={23} /> : <LuEyeClosed size={23} />}
+                            </button>
                         </div>
                         {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
                     </div>
@@ -173,17 +174,17 @@ const Registration = () => {
                                 required: 'Please confirm password',
                                 validate: (value) => value === watch('password') || 'Passwords do not match'
                             })}
-                           type={showConfirm ? 'text': 'password'}
+                            type={showConfirm ? 'text' : 'password'}
                             className="input input-bordered w-full"
                             placeholder="Confirm your password"
                         />
 
-                         <button type='button'
+                        <button type='button'
                             className='absolute  lg:mt-1 right-4 cursor-pointer'
-                            onClick={()=>setShowConfirm(prev=>!prev)}>
-                                
-                                {showConfirm? <IoEyeOutline size={23}/> :<LuEyeClosed size={23}/>}
-                               </button>
+                            onClick={() => setShowConfirm(prev => !prev)}>
+
+                            {showConfirm ? <IoEyeOutline size={23} /> : <LuEyeClosed size={23} />}
+                        </button>
                         {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>}
                     </div>
 

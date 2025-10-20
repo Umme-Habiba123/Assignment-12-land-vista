@@ -8,6 +8,7 @@ import 'aos/dist/aos.css';
 import Aos from 'aos';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { HelmetProvider } from 'react-helmet-async';
+import ThemeToggle from './Components/ThemeToggle/ThemeToggle';
 
 Aos.init()
 const queryClient = new QueryClient()

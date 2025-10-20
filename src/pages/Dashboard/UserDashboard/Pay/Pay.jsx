@@ -6,6 +6,8 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import CheckoutForm from "../CheckOutForm/CheckOutForm";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+console.log("Stripe key:", import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+
 
 const Pay = () => {
   const { id } = useParams(); // dynamic id from URL

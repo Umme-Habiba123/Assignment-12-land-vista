@@ -7,6 +7,7 @@ import { GiEgyptianProfile } from "react-icons/gi";
 // import { MdDashboard } from "react-icons/md";
 import DashboardDropdown from '../../../Components/DashboardDropdown/DashboardDropdown';
 import useAuth from '../../../hooks/useAuth';
+import ThemeToggle from '../../../Components/ThemeToggle/ThemeToggle';
 
 
 const Navbar = () => {
@@ -61,7 +62,7 @@ const Navbar = () => {
   </>
 
   return (
-    <div className='bg-[#D1D7E0] w-full shadow-md sticky z-50 top-0'>
+    <div className='bg-[#D1D7E0]  w-full shadow-md sticky z-50 top-0'>
 
       <div className="navbar w-10/12 mx-auto px-2 py-8 flex justify-between items-center ">
 
@@ -140,8 +141,17 @@ const Navbar = () => {
               )
             }
           </div>
+ <ThemeToggle></ThemeToggle>
+
+         <div>
+
+         </div>
         </div>
+
+       
       </div>
+
+      
     </div>
   );
 };

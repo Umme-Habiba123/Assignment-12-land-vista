@@ -38,7 +38,7 @@ const MyProfile = () => {
         photoURL: formData.photoURL,
       });
       if (res.data.modifiedCount > 0) {
-        window.location.reload(); // simple way to reflect changes
+        window.location.reload(); 
       }
     } catch (err) {
       console.error("Failed to update user:", err);

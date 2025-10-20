@@ -89,6 +89,10 @@ export const router = createBrowserRouter([
         Component: Login
       },
       {
+        path: 'registration',
+        Component: Registration
+      },
+      {
         path: 'forbidden',
         Component: Forbidden
       },

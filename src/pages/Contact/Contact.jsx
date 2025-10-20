@@ -23,55 +23,66 @@ const Contact = () => {
   };
 
   return (
-   <div className="bg-gray-50">
+    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen py-16 px-8 dark:text-white transition-colors duration-300">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-3xl font-semibold text-gray-800 dark:text-white mb-8">
+          📞 Contacts
+        </h1>
 
-     <div className="min-h-screen   py-16 px-8 max-w-7xl mx-auto">
-      <h1 className="text-3xl font-semibold  text-gray-800 mb-8">📞 Contacts</h1>
-
-      <div className="overflow-x-auto ">
-        <table className="w-full border-collapse">
-          <thead className="bg-pink-100 text-left text-gray-700">
-            <tr>
-              <th className="p-3">Phone Number</th>
-              <th className="p-3">Date</th>
-              <th className="p-3">Status</th>
-              <th className="p-3">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {contacts.map((c) => (
-              <tr key={c._id} className="border-b hover:bg-gray-100">
-                <td className="p-3">{c.phone}</td>
-                <td className="p-3">{new Date(c.createdAt).toLocaleString()}</td>
-                <td className="p-3">
-                  <span
-                    className={`px-3 py-1 rounded-full text-sm ${
-                      c.status === "contacted"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-yellow-100 text-yellow-700"
-                    }`}
-                  >
-                    {c.status}
-                  </span>
-                </td>
-                <td className="p-3">
-                  {c.status === "pending" && (
-                    <button
-                      onClick={() => handleStatusChange(c._id, "contacted")}
-                      className="px-4 py-1 bg-green-500 text-white rounded-md text-sm hover:bg-green-600"
-                    >
-                      Mark as Contacted
-                    </button>
-                  )}
-                </td>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead className="bg-pink-100 dark:bg-gray-800 text-left text-gray-700 dark:text-white">
+              <tr>
+                <th className="p-3 border-b border-gray-300 dark:border-gray-600">
+                  Phone Number
+                </th>
+                <th className="p-3 border-b border-gray-300 dark:border-gray-600">
+                  Date
+                </th>
+                <th className="p-3 border-b border-gray-300 dark:border-gray-600">
+                  Status
+                </th>
+                <th className="p-3 border-b border-gray-300 dark:border-gray-600">
+                  Action
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {contacts.map((c) => (
+                <tr
+                  key={c._id}
+                  className="border-b border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
+                >
+                  <td className="p-3">{c.phone}</td>
+                  <td className="p-3">{new Date(c.createdAt).toLocaleString()}</td>
+                  <td className="p-3">
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm ${
+                        c.status === "contacted"
+                          ? "bg-green-100 text-green-700 dark:bg-green-700 dark:text-green-100"
+                          : "bg-yellow-100 text-yellow-700 dark:bg-yellow-700 dark:text-yellow-100"
+                      }`}
+                    >
+                      {c.status}
+                    </span>
+                  </td>
+                  <td className="p-3">
+                    {c.status === "pending" && (
+                      <button
+                        onClick={() => handleStatusChange(c._id, "contacted")}
+                        className="px-4 py-1 bg-green-500 text-white rounded-md text-sm hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-500 dark:text-white"
+                      >
+                        Mark as Contacted
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-
-   </div>
   );
 };
 

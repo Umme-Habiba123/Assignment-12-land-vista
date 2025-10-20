@@ -5,17 +5,27 @@ import useAuth from '../../../hooks/useAuth';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import useAxios from '../../../hooks/useAxios';
+import { IoEyeOutline } from "react-icons/io5";
+import { LuEyeClosed } from "react-icons/lu";
+
 import VistaLand from '../../Shared/ProjectLogo/VistaLand';
 
 const Registration = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
     const { createUser, updateUserProfile, signInWithGoogle } = useAuth();
+    const [showPassword, setShowPassword] = useState(false)
+      const [showConfirm, setShowConfirm] = useState(false);
+    // const [password, setPassword] = useState('')
     const [profilePic, setProfilePic] = useState('');
     const axiosInstance = useAxios()
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from || '/';
 
+
+    const toggleShow = () => {
+        setShowPassword((prev) => !prev)
+    }
     const onSubmit = data => {
         createUser(data.email, data.password)
             .then(async () => {
@@ -130,34 +140,50 @@ const Registration = () => {
                     </div>
 
                     <div>
-                        <label className="block font-medium mb-1">Password</label>
-                        <input
-                            {...register('password', {
-                                required: 'Password is required',
-                                minLength: { value: 6, message: 'At least 6 characters' },
-                                pattern: {
-                                    value: /^(?=.*[A-Z])(?=.*[!@#$%^&*])/,
-                                    message: 'Must include capital & special char'
-                                }
-                            })}
-                            type="password"
-                            className="input input-bordered w-full"
-                            placeholder="Create a password"
-                        />
+                        <div className='relative'>
+                            <label className="block font-medium mb-1">Password</label>
+                            <input
+                                {...register('password', {
+                                    required: 'Password is required',
+                                    minLength: { value: 6, message: 'At least 6 characters' },
+                                    pattern: {
+                                        value: /^(?=.*[A-Z])(?=.*[!@#$%^&*])/,
+                                        message: 'Must include capital & special char'
+                                    }
+                                })}
+                                type={showPassword ? 'text': 'password'}
+                                className="input input-bordered w-full"
+                                placeholder="Create a password"
+                            />
+
+                            <button type='button'
+                            className='absolute  lg:mt-1 right-4 cursor-pointer'
+                            onClick={toggleShow}>
+                                
+                                {showPassword? <IoEyeOutline size={23}/> :<LuEyeClosed size={23}/>}
+                               </button>
+                        </div>
                         {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
                     </div>
 
-                    <div>
+                    <div className='relative'>
                         <label className="block font-medium mb-1">Confirm Password</label>
                         <input
                             {...register('confirmPassword', {
                                 required: 'Please confirm password',
                                 validate: (value) => value === watch('password') || 'Passwords do not match'
                             })}
-                            type="password"
+                           type={showConfirm ? 'text': 'password'}
                             className="input input-bordered w-full"
                             placeholder="Confirm your password"
                         />
+
+                         <button type='button'
+                            className='absolute  lg:mt-1 right-4 cursor-pointer'
+                            onClick={()=>setShowConfirm(prev=>!prev)}>
+                                
+                                {showConfirm? <IoEyeOutline size={23}/> :<LuEyeClosed size={23}/>}
+                               </button>
                         {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>}
                     </div>
 

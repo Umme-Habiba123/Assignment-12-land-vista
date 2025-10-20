@@ -26,30 +26,9 @@ a.active{
 }
 
 
-
-/* 
-@plugin "daisyui/theme" {
-  name: "light";
-  default: true;
-  --color-primary: [#802BB1];
-  --color-secondary: [#2D283E];
-  --color-3rd: [#564F6F];
-  --color-4th: [#D1D7E0];
-  --color-5th: [#4C495D];
-} */
-
-
-
-              /* #4C495D --dark gray---5 */
-              /* #D1D7E0 -- light gray---4*/
-              /* #564F6F ---3 */
-              /* #2D283E ---2 */
-              /* #802BB1  purple ---1 */
-
-
-              /* const {signInWithGoogle}=useAuth()
-    const location=useLocation()
-    const navigate=useNavigate()
-    const {signIn}=useAuth() */
-
-    /* const from =location.state?.from || '/'; */
+html.dark {
+  --bg-color: #000000;
+  --text-color: white;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}

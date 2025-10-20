@@ -11,10 +11,10 @@ import ExpandingSection from './Expandingsection/Expandingsection';
 import BookingContactSection from './BookingContactSection/BookingContactSection';
 import SalesSection from './SalesSection/SalesSection';
 
-
 const Home = () => {
     return (
         <div>
+        
             <Helmet>
                 <title>Home | LandVista</title>
                 <meta name="description" content="Nested component" />

@@ -1,4 +1,4 @@
-# 🏡 LandVista
+# 🏡 LandVista Frontend
 
 **Live Demo:** https://gilded-dolphin-31e21d.netlify.app/  
 **Repository (Client):** https://github.com/Umme-Habiba123/Assignment-12-land-vista-client-site

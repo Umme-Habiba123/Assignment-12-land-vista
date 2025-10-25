@@ -32,14 +32,14 @@ const BookingContactSection = () => {
   };
 
   return (
-    <section className="bg-gradient-to-r from-white via-gray-50 to-gray-100 py-20 px-6 md:px-20 flex items-center justify-center min-h-[80vh]">
+    <section className=" py-20 px-6 md:px-20 flex items-center justify-center min-h-[80vh]">
       <div className="grid md:grid-cols-2 gap-16 items-center max-w-6xl w-full">
         {/* Left Side */}
         <div>
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800 mb-4">
+          <h2 className="text-3xl md:text-4xl font-semibold text-gray-500 mb-4">
             Interested To <span className="text-pink-500">Book?</span>
           </h2>
-          <p className="text-gray-600 mb-8">
+          <p className="text-gray-00 mb-8">
             Please provide your phone number, our representative will contact you.
           </p>
 
@@ -53,7 +53,7 @@ const BookingContactSection = () => {
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               required
-              className="flex-1 px-4 py-3 outline-none text-gray-700 placeholder-gray-400 bg-transparent"
+              className="flex-1 px-4 py-3 outline-none text-gray-700 placeholder-gray-500 bg-transparent"
             />
             <button
               type="submit"
@@ -67,19 +67,19 @@ const BookingContactSection = () => {
         {/* Right Side */}
         <div className="space-y-6">
           <div className="border border-pink-300 rounded-lg p-5 inline-block">
-            <p className="text-gray-700 text-lg font-medium">
+            <p className="text-gray-500 text-lg font-medium">
               Hotline: <span className="text-pink-500 font-semibold">16254</span>
             </p>
           </div>
 
-          <div className="flex items-center gap-3 text-gray-700">
+          <div className="flex items-center gap-3 text-gray-500">
             <Phone className="text-pink-500" />
-            <p className="text-base">58816306-11</p>
+            <p className="text-base">01873333199</p>
           </div>
 
-          <div className="flex items-center gap-3 text-gray-700">
+          <div className="flex items-center gap-3 text-gray-500">
             <Mail className="text-pink-500" />
-            <p className="text-base">sales@navana-realestate.com</p>
+            <p className="text-base">habibaislammim@gmail.com</p>
           </div>
         </div>
       </div>

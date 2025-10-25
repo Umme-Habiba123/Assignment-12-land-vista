@@ -37,6 +37,7 @@ import Forbidden from "../pages/Authentication/Forbidden/Forbidden";
 import Profile from "../pages/Profile/Profile";
 import NewsDetail from "../pages/HomePage/NewsSection/NewsDetails/NewsDetails";
 import Contact from "../pages/Contact/Contact";
+import PropertyListings from "../pages/PropertyListings/PropertyListings";
 
 
 export const router = createBrowserRouter([
@@ -76,6 +77,10 @@ export const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact></Contact>
+      },
+      {
+        path: "/propertyListings",
+        element: <PropertyListings></PropertyListings>
       },
 
     ]

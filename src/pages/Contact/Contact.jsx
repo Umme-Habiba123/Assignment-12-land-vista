@@ -23,9 +23,9 @@ const Contact = () => {
   };
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen py-16 px-8 dark:text-white transition-colors duration-300">
+    <div className="  min-h-screen py-16 px-8  transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-semibold text-gray-800 dark:text-white mb-8">
+        <h1 className="text-3xl font-semibold text-gray-500  mb-8">
           📞 Contacts
         </h1>
 

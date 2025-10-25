@@ -7,6 +7,7 @@ import useAuth from '../hooks/useAuth';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import Navbar from '../pages/Shared/Navbar/Navbar';
 import Footer from '../pages/Shared/Footer/Footer';
+import { FaBars } from 'react-icons/fa';
 
 const DashboardLayout = () => {
   const { user } = useAuth();
@@ -25,60 +26,48 @@ const DashboardLayout = () => {
     fetchRole();
   }, [user?.email, axiosSecure]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  if (loading) return <div>Loading...</div>;
+  if (!role) return <div>Unauthorized access</div>;
 
-  // যদি রোল পাওয়া না যায়, লগইন ইউজারকে Unauthorized দেখানো যেতে পারে বা অন্যথায় হ্যান্ডেল
-  if (!role) {
-    return <div>Unauthorized access</div>;
-  }
-
-  // এখানে রোল অনুযায়ী Redirect করুন
   if (window.location.pathname === "/dashboard") {
-    if (role === 'user') {
-      return <Navigate to="/dashboard/user" replace />;
-    } else if (role === 'agent') {
-      return <Navigate to="/dashboard/agent" replace />;
-    } else if (role === 'admin') {
-      return <Navigate to="/dashboard/admin" replace />;
-    }
+    if (role === 'user') return <Navigate to="/dashboard/user" replace />;
+    if (role === 'agent') return <Navigate to="/dashboard/agent" replace />;
+    if (role === 'admin') return <Navigate to="/dashboard/admin" replace />;
   }
 
   return (
-   <div>
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
 
-     <Navbar></Navbar>
-    <div>
+      {/* Drawer */}
+      <div className="drawer lg:drawer-open flex-1">
+        <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
 
-       <div className="w-10/12 mx-auto">
-     
-      {/* লোগো ও সাইডবার একই রকম */}
-      {/* Drawer ... */}
-      <div className="drawer lg:drawer-open">
-        <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col">
-          {/* Small screen navbar */}
-          {/* Navbar code here */}
+        {/* Content */}
+        <div className="drawer-content flex flex-col p-4">
+          {/* Mobile drawer toggle button */}
+          <div className="lg:hidden mb-4">
+            <label htmlFor="dashboard-drawer" className="btn btn-outline btn-sm flex items-center gap-2 border-gray-400">
+              <FaBars /> Menu
+            </label>
+          </div>
           <Outlet />
         </div>
-        <div className="drawer-side">
-          <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+
+        {/* Sidebar */}
+        <div className="drawer-side ">
+          <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
+          <ul className="menu bg-base-200 text-black min-h-full w-64 p-4 ">
             {role === 'user' && <UserSidebar />}
             {role === 'agent' && <AgentSidebar />}
             {role === 'admin' && <AdminSidebar />}
           </ul>
         </div>
       </div>
-    </div>
-    </div>
 
-
-    <Footer></Footer>
-   </div>
+      <Footer />
+    </div>
   );
 };
-
 
 export default DashboardLayout;

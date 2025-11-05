@@ -4,13 +4,13 @@ const Contact = () => {
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/contacts")
+    fetch("https://real-state-server-site.vercel.app/contacts")
       .then((res) => res.json())
       .then((data) => setContacts(data));
   }, []);
 
   const handleStatusChange = async (id, newStatus) => {
-    await fetch(`http://localhost:5000/contacts/${id}`, {
+    await fetch(`https://real-state-server-site.vercel.app/contacts/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: newStatus }),
@@ -23,44 +23,38 @@ const Contact = () => {
   };
 
   return (
-    <div className="  min-h-screen py-16 px-8  transition-colors duration-300">
+    <div className="min-h-screen py-16 px-8 bg-white transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-semibold text-gray-500  mb-8">
+        <h1 className="text-3xl font-semibold text-red-600 mb-8">
           📞 Contacts
         </h1>
 
         <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
-            <thead className="bg-pink-100 dark:bg-gray-800 text-left text-gray-700 dark:text-white">
+          <table className="w-full border-collapse text-left">
+            <thead className="bg-gray-100 text-black">
               <tr>
-                <th className="p-3 border-b border-gray-300 dark:border-gray-600">
-                  Phone Number
-                </th>
-                <th className="p-3 border-b border-gray-300 dark:border-gray-600">
-                  Date
-                </th>
-                <th className="p-3 border-b border-gray-300 dark:border-gray-600">
-                  Status
-                </th>
-                <th className="p-3 border-b border-gray-300 dark:border-gray-600">
-                  Action
-                </th>
+                <th className="p-3 border-b border-gray-300">Phone Number</th>
+                <th className="p-3 border-b border-gray-300">Date</th>
+                <th className="p-3 border-b border-gray-300">Status</th>
+                <th className="p-3 border-b border-gray-300">Action</th>
               </tr>
             </thead>
             <tbody>
               {contacts.map((c) => (
                 <tr
                   key={c._id}
-                  className="border-b border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  className="border-b border-gray-300 hover:bg-gray-50"
                 >
-                  <td className="p-3">{c.phone}</td>
-                  <td className="p-3">{new Date(c.createdAt).toLocaleString()}</td>
+                  <td className="p-3 text-black">{c.phone}</td>
+                  <td className="p-3 text-black">
+                    {new Date(c.createdAt).toLocaleString()}
+                  </td>
                   <td className="p-3">
                     <span
-                      className={`px-3 py-1 rounded-full text-sm ${
+                      className={`px-3 py-1 rounded-full text-sm font-medium ${
                         c.status === "contacted"
-                          ? "bg-green-100 text-green-700 dark:bg-green-700 dark:text-green-100"
-                          : "bg-yellow-100 text-yellow-700 dark:bg-yellow-700 dark:text-yellow-100"
+                          ? "bg-green-100 text-green-700"
+                          : "bg-red-100 text-red-700"
                       }`}
                     >
                       {c.status}
@@ -70,7 +64,7 @@ const Contact = () => {
                     {c.status === "pending" && (
                       <button
                         onClick={() => handleStatusChange(c._id, "contacted")}
-                        className="px-4 py-1 bg-green-500 text-white rounded-md text-sm hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-500 dark:text-white"
+                        className="px-4 py-1 bg-green-500 text-white rounded-md text-sm hover:bg-green-600"
                       >
                         Mark as Contacted
                       </button>

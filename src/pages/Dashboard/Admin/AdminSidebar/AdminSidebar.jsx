@@ -1,5 +1,5 @@
 // components/Sidebar/AdminSidebar.jsx
-import { NavLink } from "react-router-dom"; // fixed import
+import { NavLink } from "react-router"; // fixed import
 import { FaUserShield, FaHome, FaUsersCog, FaStar, FaBullhorn } from "react-icons/fa";
 import VistaLand from "../../../Shared/ProjectLogo/VistaLand";
 
@@ -16,7 +16,7 @@ const AdminSidebar = () => {
     <div className="flex flex-col h-full bg-base-200 text-black">
       {/* Logo & Title */}
       <div className="flex flex-col items-center lg:items-start p-4">
-        <VistaLand />
+
         <h2 className="text-xl lg:text-2xl font-bold text-purple-700 mt-4 mb-6 text-center lg:text-left">
           Admin Dashboard
         </h2>

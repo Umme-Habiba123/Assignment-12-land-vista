@@ -107,7 +107,7 @@ const Registration = () => {
     return (
         <div className="min-h-screen px-4 py-10 bg-gray-400">
             {/* Logo */}
-            <div className="max-w-4xl mx-auto mb-8">
+            <div className="flex justify-center mx-auto mb-8 ">
                 <VistaLand />
             </div>
 

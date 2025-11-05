@@ -1,4 +1,5 @@
 // src/components/TopAgents.jsx
+import React from "react";
 import { FaPhoneAlt, FaStar, FaCheckCircle, FaBuilding } from "react-icons/fa";
 
 const agents = [
@@ -34,15 +35,18 @@ const agents = [
 const TopAgents = () => {
   return (
     <section className="max-w-7xl mx-auto px-4 py-10">
-      <h2 className="text-3xl font-bold text-center text-[#4C495D] mb-8">Top Real Estate Agencies</h2>
+      <h2 className="text-3xl font-bold text-center text-red-600 mb-8 sansita-font lg:mt-20">
+        Top Real Estate Agencies
+      </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {agents.map((agent) => (
-          <div data-aos="fade-left"
+          <div
+            data-aos="fade-left"
             key={agent.id}
             className="bg-white rounded-lg overflow-hidden border border-gray-200 shadow-xl hover:shadow-amber-200"
           >
-            {/* Full-width image */}
+            {/* Image */}
             {agent.image ? (
               <img
                 src={agent.image}
@@ -50,33 +54,33 @@ const TopAgents = () => {
                 className="w-full h-48 object-cover"
               />
             ) : (
-              <div className="w-full h-48 bg-gray-200 flex items-center justify-center text-[#802BB1] text-4xl">
+              <div className="w-full h-48 bg-gray-200 flex items-center justify-center text-red-600 text-4xl">
                 <FaBuilding />
               </div>
             )}
 
             {/* Content */}
             <div data-aos="fade-right" className="p-4 text-center space-y-2">
-              <h3 className="text-lg font-semibold text-[#2D283E]">{agent.name}</h3>
-              <p className="text-sm text-[#802BB1]">{agent.agency}</p>
+              <h3 className="text-lg font-semibold text-black">{agent.name}</h3>
+              <p className="text-sm text-red-600">{agent.agency}</p>
 
-              <div className="flex justify-center items-center gap-1 text-yellow-500">
-                <FaStar /> <span>{agent.rating}</span>
+              <div className="flex justify-center items-center gap-1 text-red-600">
+                <FaStar /> <span className="text-black">{agent.rating}</span>
               </div>
 
               <div className="text-sm">
                 {agent.verified ? (
-                  <span className="text-green-600 flex justify-center items-center gap-1">
+                  <span className="flex justify-center items-center gap-1 text-red-600">
                     <FaCheckCircle /> Verified
                   </span>
                 ) : (
-                  <span className="text-red-500">Not Verified</span>
+                  <span className="text-black">Not Verified</span>
                 )}
               </div>
 
               <a
                 href={`tel:${agent.phone}`}
-                className="btn btn-sm  btn-outline border-2 border-[#dddce1] mt-2 flex items-center justify-center gap-2 shadow-2xl  font-bold text-sm"
+                className="mt-2 inline-flex items-center justify-center gap-2 rounded-md border-1 border-red-500 px-4 py-2 font-bold text-sm text-black hover:bg-red-500 hover:text-white transition-colors"
               >
                 <FaPhoneAlt /> Contact
               </a>

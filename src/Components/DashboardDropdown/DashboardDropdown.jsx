@@ -2,7 +2,7 @@ import React from "react";
 import { MdDashboard } from "react-icons/md";
 import { FaUserTie, FaUserShield, FaUser } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
-import { NavLink } from "react-router"; // react-router-dom হওয়া উচিত
+import { NavLink } from "react-router"; 
 import useRole from "../../hooks/useRole";
 import { Helmet } from "react-helmet";
 
@@ -38,9 +38,9 @@ const DashboardDropdown = () => {
         <title>Dashboard | LandVista</title>
         <meta name="description" content="Nested component" />
       </Helmet>
-      <div tabIndex={0} role="button" className="m-1 flex items-center gap-1 cursor-pointer">
-        <MdDashboard />
-        Dashboard <IoIosArrowDown size={20} />
+      <div tabIndex={0} role="button" className="mt-2 flex items-center gap-1 cursor-pointer font-semibold ">
+       
+        Dashboard <IoIosArrowDown size={15} />
       </div>
       <ul tabIndex={0} className="dropdown-content menu bg-[#d3d0d7] font-bold text-black rounded-box z-10 w-52 p-2 shadow">
         {menu ? (

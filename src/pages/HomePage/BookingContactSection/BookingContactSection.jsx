@@ -14,7 +14,7 @@ const BookingContactSection = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:5000/contacts", {
+      const res = await fetch("https://real-state-server-site.vercel.app/contacts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(contactData),
@@ -32,14 +32,14 @@ const BookingContactSection = () => {
   };
 
   return (
-    <section className=" py-20 px-6 md:px-20 flex items-center justify-center min-h-[80vh]">
+    <section className="min-h-[80vh] flex items-center justify-center py-20 px-6 md:px-20">
       <div className="grid md:grid-cols-2 gap-16 items-center max-w-6xl w-full">
         {/* Left Side */}
         <div>
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-500 mb-4">
-            Interested To <span className="text-pink-500">Book?</span>
+          <h2 className="text-3xl md:text-4xl font-semibold text-gray-700 mb-4">
+            Interested To <span className="text-red-600 font-bold">Book?</span>
           </h2>
-          <p className="text-gray-00 mb-8">
+          <p className="text-gray-600 mb-8">
             Please provide your phone number, our representative will contact you.
           </p>
 
@@ -57,7 +57,7 @@ const BookingContactSection = () => {
             />
             <button
               type="submit"
-              className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 font-medium transition-all"
+              className="bg-red-600 hover:bg-black text-white px-6 py-3 font-medium transition-all"
             >
               Send
             </button>
@@ -66,19 +66,19 @@ const BookingContactSection = () => {
 
         {/* Right Side */}
         <div className="space-y-6">
-          <div className="border border-pink-300 rounded-lg p-5 inline-block">
-            <p className="text-gray-500 text-lg font-medium">
-              Hotline: <span className="text-pink-500 font-semibold">16254</span>
+          <div className="border border-red-300 rounded-lg p-5 inline-block">
+            <p className="text-gray-700 text-lg font-medium">
+              Hotline: <span className="text-red-600 font-semibold">16254</span>
             </p>
           </div>
 
-          <div className="flex items-center gap-3 text-gray-500">
-            <Phone className="text-pink-500" />
+          <div className="flex items-center gap-3 text-gray-700">
+            <Phone className="text-red-600" />
             <p className="text-base">01873333199</p>
           </div>
 
-          <div className="flex items-center gap-3 text-gray-500">
-            <Mail className="text-pink-500" />
+          <div className="flex items-center gap-3 text-gray-700">
+            <Mail className="text-red-600" />
             <p className="text-base">habibaislammim@gmail.com</p>
           </div>
         </div>

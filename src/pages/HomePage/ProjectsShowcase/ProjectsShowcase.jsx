@@ -5,7 +5,7 @@ const ProjectsShowcase = () => {
     <section className=" mx-auto px-4 py-16 sansita-font ">
       {/* Top Title */}
       <div className="text-center mb-10">
-        <p className="text-sm uppercase text-cyan-800 font-semibold tracking-wide">
+        <p className="text-sm uppercase text-red-500 font-semibold tracking-wide">
           Our Works
         </p>
         <h2 className="text-3xl md:text-4xl sansita-font text-[#605b70] ">

@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { ShieldCheck, Pencil } from "lucide-react";
 import moment from "moment";
-import useAxiosSecure from "../../../../hooks/useAxios";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../hooks/useAuth";
-
 
 
 const AgentProfile = () => {
@@ -18,26 +17,36 @@ const AgentProfile = () => {
   });
 
   useEffect(() => {
-    const fetchRole = async () => {
-      if (user?.email) {
-        const res = await axiosInstance.get(`/users/role/${user.email}`);
-        setRole(res.data?.role);
-      }
-    };
+    let isMounted = true;
 
-    const fetchUserInfo = async () => {
-      if (user?.email) {
-        const res = await axiosInstance.get(`/users/${user.email}`);
-        setUserInfo(res.data);
+    const fetchData = async () => {
+      if (!user?.email || !isMounted) return;
+
+      try {
+        // fetch role & user info together
+        const [roleRes, infoRes] = await Promise.all([
+          axiosInstance.get(`/users/role/${user.email}`),
+          axiosInstance.get(`/users/${user.email}`)
+        ]);
+
+        if (!isMounted) return;
+
+        setRole(roleRes.data?.role);
+        setUserInfo(infoRes.data);
         setFormData({
-          displayName: res.data?.displayName || "",
-          photoURL: res.data?.photoURL || "",
+          displayName: infoRes.data?.displayName || "",
+          photoURL: infoRes.data?.photoURL || "",
         });
+      } catch (err) {
+        console.error("Error fetching agent data:", err);
       }
     };
 
-    fetchRole();
-    fetchUserInfo();
+    fetchData();
+
+    return () => {
+      isMounted = false;
+    };
   }, [user, axiosInstance]);
 
   const handleEditClick = () => {
@@ -55,6 +64,7 @@ const AgentProfile = () => {
         displayName: formData.displayName,
         photoURL: formData.photoURL,
       });
+
       if (res.data.modifiedCount > 0) {
         setUserInfo((prev) => ({
           ...prev,
@@ -68,16 +78,25 @@ const AgentProfile = () => {
     }
   };
 
-  if (!role || role === "user") {
+  // 🔒 restrict non-agent users
+  if (!role) {
+    return (
+      <p className="text-center text-gray-500 mt-10 text-lg">
+        Loading profile...
+      </p>
+    );
+  }
+
+  if (role === "user") {
     return (
       <p className="text-center text-red-500 mt-10 text-xl">
-        This page is for Agents only 
+        This page is for Agents only
       </p>
     );
   }
 
   return (
-    <div className="min-h-[80vh] flex justify-center items-center px-4 py-10 bg-gradient-to-br  to-white">
+    <div className="min-h-[80vh] flex justify-center items-center px-4 py-10 bg-gradient-to-br from-purple-50 to-white">
       <div className="w-full max-w-2xl bg-white shadow-2xl rounded-3xl p-8 relative">
         <h2 className="text-3xl font-bold text-center text-purple-700 mb-8">
           Agent Profile <ShieldCheck className="inline-block text-green-600 ml-2" />
@@ -85,7 +104,7 @@ const AgentProfile = () => {
 
         <button
           onClick={handleEditClick}
-          className="absolute top-5 right-5 bg-purple-100 hover:bg-purple-200 p-2 rounded-full text-purple-700"
+          className="absolute top-5 right-5 bg-purple-100 hover:bg-purple-200 p-2 rounded-full text-purple-700 transition"
         >
           <Pencil size={20} />
         </button>
@@ -111,7 +130,7 @@ const AgentProfile = () => {
         </div>
       </div>
 
-      {/* Edit Modal */}
+      {/* ✏️ Edit Modal */}
       {isEditModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl p-6 w-full max-w-md shadow-lg">

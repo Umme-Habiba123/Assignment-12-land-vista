@@ -57,7 +57,7 @@ const DashboardLayout = () => {
         {/* Sidebar */}
         <div className="drawer-side ">
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-          <ul className="menu bg-base-200 text-black min-h-full w-64 p-4 ">
+          <ul className="lg:ml-50 menu bg-base-200 text-black min-h-full w-64 p-4 ">
             {role === 'user' && <UserSidebar />}
             {role === 'agent' && <AgentSidebar />}
             {role === 'admin' && <AdminSidebar />}
@@ -71,3 +71,10 @@ const DashboardLayout = () => {
 };
 
 export default DashboardLayout;
+
+
+// Agent email : tahiya@gmail.com
+// agent Pass : 123456A@
+
+// admin email : nahiyarahman@gmail.com
+// agent Pass : 123456A@

@@ -33,7 +33,6 @@ const PropertyDetails = () => {
     },
   });
 
-  // Separate current user's review and other users' reviews
   const userReview = reviews.find((review) => review.userEmail === user.email);
   const otherReviews = reviews.filter((review) => review.userEmail !== user.email);
 
@@ -47,9 +46,7 @@ const PropertyDetails = () => {
       };
       await axiosSecure.post("/wishlist", wishlistData);
     },
-    onSuccess: () => {
-      Swal.fire("Added!", "Property added to wishlist", "success");
-    },
+    onSuccess: () => Swal.fire("Added!", "Property added to wishlist", "success"),
     onError: (error) => {
       if (error?.response?.status === 409) {
         Swal.fire("Already Added", "This property is already in your wishlist", "info");
@@ -59,7 +56,7 @@ const PropertyDetails = () => {
     },
   });
 
-  // Review mutation to post new review
+  // Review mutation
   const reviewMutation = useMutation({
     mutationFn: async () => {
       const reviewData = {
@@ -87,31 +84,34 @@ const PropertyDetails = () => {
     return <p className="text-center text-green-600 mt-10">Loading property details...</p>;
 
   return (
-    <div className="max-w-4xl mx-auto p-4 space-y-6">
+    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md space-y-6">
+      {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="btn px-5 mb-5 sansita-font text-lg flex items-center gap-2"
+        className="btn px-5 mb-5 text-lg flex items-center gap-2 bg-gray-200 hover:bg-gray-300 rounded"
       >
-        <FaArrowLeftLong /> Back to Previous
+        <FaArrowLeftLong /> Back
       </button>
 
+      {/* Property Image */}
       <img
         src={property.image}
         alt={property.title}
-        style={{ width: "100%", height: "500px", objectFit: "cover", borderRadius: "8px" }}
+        className="w-full h-[500px] object-cover rounded-lg shadow-sm"
       />
 
+      {/* Property Info */}
       <h2 className="text-3xl font-bold">{property.title}</h2>
-      <p className="text-gray-600">{property.description}</p>
-      <p className="text-lg">
-        <strong>Price Range:</strong> ৳{property.minPrice} - ৳{property.maxPrice}
+      <p className="text-gray-700">{property.description}</p>
+      <p className="text-lg font-semibold">
+        Price Range: <span className="text-purple-600">৳{property.minPrice} - ৳{property.maxPrice}</span>
       </p>
-      <p>
-        <strong>Agent:</strong> {property.agentName}
-      </p>
+      <p className="text-gray-700">Agent: {property.agentName}</p>
+
+      {/* Wishlist */}
       <button
         onClick={() => wishlistMutation.mutate()}
-        className="bg-[#564F6F] text-white px-4 py-2 rounded hover:bg-[#D1D7E0] hover:text-black"
+        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
       >
         Add to Wishlist
       </button>
@@ -120,9 +120,9 @@ const PropertyDetails = () => {
       <div className="mt-10">
         <h3 className="text-2xl font-semibold mb-4">Reviews</h3>
 
-        {/* User's own review */}
+        {/* User's Review */}
         {userReview ? (
-          <div className="border border-blue-400 bg-blue-50 p-4 rounded mb-6">
+          <div className="border border-blue-300 bg-blue-50 p-4 rounded mb-6">
             <h4 className="text-lg font-semibold text-blue-700 mb-1">Your Review</h4>
             <p className="text-gray-800">{userReview.review}</p>
             <p className="text-sm text-gray-500 mt-1">
@@ -130,23 +130,22 @@ const PropertyDetails = () => {
             </p>
           </div>
         ) : (
-          // If user hasn't reviewed yet, show Add Review button
           <button
             onClick={() => setShowModal(true)}
-            className="mb-6 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+            className="mb-6 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
           >
             Add a Review
           </button>
         )}
 
-        {/* Other users' reviews */}
+        {/* Other Users' Reviews */}
         {otherReviews.length === 0 ? (
           <p className="text-gray-600 italic">No other reviews yet.</p>
         ) : (
           <ul className="space-y-3">
             {otherReviews.map((review) => (
-              <li key={review._id} className="border border-gray-300 p-3 rounded">
-                <p className="font-semibold">{review.userName}</p>
+              <li key={review._id} className="border border-gray-300 p-3 rounded bg-gray-50">
+                <p className="font-semibold text-gray-800">{review.userName}</p>
                 <p className="text-gray-700">{review.review}</p>
                 <p className="text-sm text-gray-500">
                   {new Date(review.reviewedAt).toLocaleString("en-GB")}
@@ -160,10 +159,10 @@ const PropertyDetails = () => {
       {/* Review Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded p-6 w-full max-w-md">
-            <h3 className="text-2xl font-bold mb-4 sansita-font">Write a Review</h3>
+          <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-lg">
+            <h3 className="text-2xl font-bold mb-4">Write a Review</h3>
             <textarea
-              className="w-full text-lg border-2 border-gray-300 focus:outline-none focus:border-purple-300 p-2 rounded"
+              className="w-full text-lg border-2 border-gray-300 focus:outline-none focus:border-purple-400 p-2 rounded"
               rows={4}
               placeholder="Write your thoughts..."
               value={reviewText}
@@ -172,13 +171,13 @@ const PropertyDetails = () => {
             <div className="mt-4 flex justify-end space-x-2">
               <button
                 onClick={() => setShowModal(false)}
-                className="px-4 py-1 rounded bg-gray-300 hover:bg-gray-400"
+                className="px-4 py-1 rounded bg-gray-300 hover:bg-gray-400 transition"
               >
                 Cancel
               </button>
               <button
                 onClick={() => reviewMutation.mutate()}
-                className="px-4 py-1 rounded bg-green-600 text-white hover:bg-green-700"
+                className="px-4 py-1 rounded bg-green-600 text-white hover:bg-green-700 transition"
                 disabled={!reviewText.trim()}
               >
                 Submit Review

@@ -38,7 +38,8 @@ import Profile from "../pages/Profile/Profile";
 import NewsDetail from "../pages/HomePage/NewsSection/NewsDetails/NewsDetails";
 import Contact from "../pages/Contact/Contact";
 import PropertyListings from "../pages/PropertyListings/PropertyListings";
-
+import Blog from '../pages/Blogs/Blog'
+import Gallery from "../pages/Gallery/Gallery";
 
 export const router = createBrowserRouter([
   {
@@ -81,6 +82,14 @@ export const router = createBrowserRouter([
       {
         path: "/propertyListings",
         element: <PropertyListings></PropertyListings>
+      },
+      {
+        path: "/blog",
+        element: <Blog></Blog>
+      },
+      {
+        path: "/gallery",
+        element: <Gallery></Gallery>
       },
 
     ]

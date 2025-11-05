@@ -6,10 +6,12 @@ import ProjectsShowcase from './ProjectsShowcase/ProjectsShowcase';
 import LatestReviews from './LatestReview/LatestReview';
 import { Helmet } from 'react-helmet';
 import NewsSection from './NewsSection/NewsSection';
-import NewsDetail from './NewsSection/NewsDetails/NewsDetails';
 import ExpandingSection from './Expandingsection/Expandingsection';
 import BookingContactSection from './BookingContactSection/BookingContactSection';
 import SalesSection from './SalesSection/SalesSection';
+import PropertyDetails from './PropertyDetails/PropertyDetails';
+import FAQ from './FAQ/FAQ';
+import HomeGallery from './HomeGallery/HomeGallery';
 
 const Home = () => {
     return (
@@ -26,10 +28,12 @@ const Home = () => {
             <Banner></Banner>
             <AdvertisementSection></AdvertisementSection>
             <ProjectsShowcase></ProjectsShowcase>
-            <NewsSection>
-            </NewsSection>
+            <HomeGallery></HomeGallery>
+            <PropertyDetails></PropertyDetails>
+            <NewsSection></NewsSection>
             <LatestReviews></LatestReviews>
             <SalesSection></SalesSection>
+            <FAQ></FAQ>
             <ExpandingSection></ExpandingSection>         
             <TopAgents></TopAgents>
               <BookingContactSection></BookingContactSection>

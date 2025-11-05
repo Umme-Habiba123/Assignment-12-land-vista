@@ -1,70 +1,74 @@
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router";
+import { FaMoon, FaSun } from "react-icons/fa";
 import userPhoto from "../../../assets/user.png";
-import { AiFillHome } from "react-icons/ai";
-import { FaBuilding, FaPhone } from "react-icons/fa";
-import { GiEgyptianProfile } from "react-icons/gi";
-import { CiLollipop } from "react-icons/ci";
 import VistaLand from "../ProjectLogo/VistaLand";
-import DashboardDropdown from "../../../Components/DashboardDropdown/DashboardDropdown";
-import ThemeToggle from "../../../Components/ThemeToggle/ThemeToggle";
+import { ThemeContext } from "../../../context/ThemeContext/ThemeContext";
 import useAuth from "../../../hooks/useAuth";
+import DashboardDropdown from "../../../Components/DashboardDropdown/DashboardDropdown";
 
 const Navbar = () => {
-  const { logOutUser, user } = useAuth();
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { user, logOutUser } = useAuth();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleSignOut = () => {
     logOutUser()
-      .then(() => console.log("sign out"))
-      .catch((error) => console.log(error));
+      .then(() => console.log("Signed out"))
+      .catch((err) => console.log(err));
   };
 
   const links = (
     <>
       <li>
         <NavLink to="/" className="flex items-center gap-1">
-          <AiFillHome /> Home
+          Home
         </NavLink>
       </li>
-
-      <li>
+      {/* <li>
         <NavLink to="/profile" className="flex items-center gap-1">
-          <GiEgyptianProfile size={22} /> Profile
+          Profile
         </NavLink>
-      </li>
-
+      </li> */}
       <li>
-        <NavLink to="/all-properties" className="flex items-center gap-1">
-          <FaBuilding /> All Properties
+        <NavLink to="/gallery" className="flex items-center gap-1">
+          Gallery
         </NavLink>
       </li>
-
+      {/* <li>
+        <NavLink to="/all-properties" className="flex items-center gap-1">
+          All Properties
+        </NavLink>
+      </li> */}
       <li>
         <NavLink to="/propertyListings" className="flex items-center gap-1">
-          <CiLollipop size={22} /> Property Listings
+          Property
         </NavLink>
       </li>
-
-      {user && (
-        <>
-          <DashboardDropdown />
-          <li>
-            <NavLink to="/contact" className="flex items-center gap-1">
-              <FaPhone /> Contact
-            </NavLink>
-          </li>
-        </>
-      )}
+      {user && <DashboardDropdown/>}
+      <li>
+        <NavLink to="/contact" className="flex items-center gap-1">
+          Contact
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/blog" className="flex items-center gap-1">
+          Blog
+        </NavLink>
+      </li>
     </>
   );
 
   return (
-    <div className="bg-gray-300 w-full shadow-md sticky top-0 z-50">
-      <div className="navbar w-[95%] md:w-10/12 mx-auto px-3 md:px-2 py-4 md:py-6 flex justify-between items-center">
-        {/* Left: Logo & Dropdown */}
+    <nav className=" w-full shadow-md sticky top-0 z-50 transition-colors duration-300">
+      <div className="navbar w-[95%] md:w-10/12 mx-auto px-3 md:px-2 py-2 flex justify-between items-center sansita-font">
+        {/* Left: Logo & Mobile Menu */}
         <div className="flex items-center gap-3">
-          {/* Mobile Menu */}
-          <div className="dropdown lg:hidden">
-            <label tabIndex={0} className="btn btn-ghost">
+          <div className="lg:hidden">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="btn btn-ghost p-1"
+            >
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -78,43 +82,40 @@ const Navbar = () => {
                   d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>
-            </label>
-            <ul
-              tabIndex={0}
-              className="sansita-font dropdown-content menu menu-sm mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-sm text-gray-600 z-[100]"
-            >
-              {links}
-            </ul>
+            </button>
+            {mobileMenuOpen && (
+              <ul className="absolute top-14 left-0 bg-gray-100 w-52 shadow-md rounded-md p-2 space-y-2">
+                {links}
+              </ul>
+            )}
           </div>
           <VistaLand />
         </div>
 
-        {/* Center: Nav Links (hidden on mobile) */}
-        <div className="navbar-center hidden lg:flex dancing-script-font">
-          <ul className="menu sansita-font menu-horizontal gap-5 px-1 text-lg">
-            {links}
-          </ul>
+        {/* Center: Links for large screens */}
+        <div className="navbar-center hidden lg:flex font-semibold">
+          <ul className="menu menu-horizontal gap-4">{links}</ul>
         </div>
 
-        {/* Right: User Info + Buttons */}
-        <div className="flex items-center gap-3 sm:gap-4 flex-wrap justify-end">
+        {/* Right: User + Theme Toggle */}
+        <div className="flex items-center gap-3 sm:gap-4">
           {/* User avatar */}
           <div className="relative group w-9 h-9 sm:w-10 sm:h-10">
             <img
-              className="w-full h-full rounded-full object-cover border border-purple-300"
               src={user?.photoURL || userPhoto}
               alt="User"
+              className="w-full h-full rounded-full object-cover border border-purple-300"
             />
             {user?.displayName && (
-              <p className="absolute top-full mt-1 left-1/2 transform -translate-x-1/2 bg-gray-200 text-gray-700 text-xs font-semibold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
+              <p className="absolute top-full mt-1 left-1/2 transform -translate-x-1/2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 text-xs font-semibold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
                 {user.displayName}
               </p>
             )}
           </div>
 
-          {/* User email (hidden on very small screens) */}
+          {/* Email */}
           {user && (
-            <p className="hidden md:block text-xs text-gray-600 truncate max-w-[140px]">
+            <p className="hidden md:block text-xs  truncate max-w-[140px]">
               {user.email}
             </p>
           )}
@@ -124,7 +125,7 @@ const Navbar = () => {
             {user ? (
               <button
                 onClick={handleSignOut}
-                className="btn btn-outline btn-sm border-2 border-white bg-[#564F6F] text-white hover:bg-[#D1D7E0] font-bold hover:text-[#802BB1] px-3 sm:px-4"
+                className="btn btn-outline btn-sm border-1 border-gray-300 text-black  font-bold hover:text-red-500 px-3 sm:px-4"
               >
                 LOG OUT
               </button>
@@ -145,10 +146,15 @@ const Navbar = () => {
           </div>
 
           {/* Theme Toggle */}
-          <ThemeToggle />
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:ring-2 transition-colors duration-300"
+          >
+            {theme === "light" ? <FaMoon /> : <FaSun />}
+          </button>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 

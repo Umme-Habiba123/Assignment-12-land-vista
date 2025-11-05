@@ -22,7 +22,7 @@ const AllProperties = () => {
 
   if (isLoading)
     return (
-      <p className="text-center mt-10 text-2xl text-green-600">
+      <p className="text-center mt-10 text-2xl text-black">
         Loading properties...
       </p>
     );
@@ -39,19 +39,21 @@ const AllProperties = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
-
       <Helmet>
-        <title>ALlProperties | LandVista</title>
-        <meta name="description" content="Nested component" />
+        <title>AllProperties | LandVista</title>
+        <meta name="description" content="All verified properties" />
       </Helmet>
+
+      {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="btn px-5 mb-5 sansita-font text-lg flex items-center gap-2"
+        className="btn px-5 mb-5 flex items-center gap-2 text-black hover:text-red-600 border border-gray-300 rounded-lg transition-colors"
       >
         <FaArrowLeftLong /> Back to Previous
       </button>
 
-      <h2 className="text-2xl font-bold mb-6 text-purple-700 flex gap-2">
+      {/* Section Heading */}
+      <h2 className="text-2xl font-bold mb-6 text-red-600 flex gap-2">
         All Verified Properties
       </h2>
 
@@ -64,19 +66,20 @@ const AllProperties = () => {
         className="input input-bordered mb-3 w-full max-w-md mx-auto block text-center text-lg placeholder:text-gray-400 rounded-lg shadow-md"
       />
 
-
+      {/* Sort Select */}
       <div className="mb-6 max-w-md mx-auto">
         <select
           value={sortOrder}
           onChange={(e) => setSortOrder(e.target.value)}
           className="select select-bordered w-full rounded-lg shadow-md"
         >
-          <option value="" >Sort by Price</option>
+          <option value="">Sort by Price</option>
           <option value="asc">Price: Low to High</option>
           <option value="desc">Price: High to Low</option>
         </select>
       </div>
 
+      {/* Properties Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredProperties.length === 0 ? (
           <p className="text-center col-span-full text-gray-500">
@@ -86,36 +89,36 @@ const AllProperties = () => {
           filteredProperties.map((property) => (
             <div
               key={property._id}
-              className="bg-white rounded-xl shadow-md p-4 border border-gray-100"
+              className="bg-white rounded-xl shadow-md p-4 border border-gray-100 hover:shadow-red-200 transition-shadow duration-300"
             >
               <img
                 src={property.image}
-                alt="Property"
+                alt={property.title}
                 className="h-48 w-full object-cover rounded-lg"
               />
-              <h3 className="text-lg font-bold mt-3">{property.title}</h3>
-              <p className="text-sm text-gray-600">{property.location}</p>
+              <h3 className="text-lg font-bold mt-3 text-black">{property.title}</h3>
+              <p className="text-sm text-black">{property.location}</p>
 
               <div className="flex items-center gap-2 mt-2">
                 <img
                   src={property.agentImage}
-                  alt="Agent"
+                  alt={property.agentName}
                   className="w-8 h-8 rounded-full border"
                 />
-                <span className="text-sm text-gray-700">{property.agentName}</span>
+                <span className="text-sm text-black">{property.agentName}</span>
               </div>
 
-              <p className="mt-1 text-xs text-green-600 font-medium">
+              <p className="mt-1 text-sm text-red-600 font-medium">
                 ✅ {property.verificationStatus}
               </p>
 
-              <p className="text-purple-600 font-bold mt-1 sansita-font">
+              <p className="text-red-600 font-bold mt-1">
                 ৳{property.minPrice} - ৳{property.maxPrice}
               </p>
 
               <button
                 onClick={() => navigate(`/property-details/${property._id}`)}
-                className="mt-4 btn btn-sm btn-outline btn-primary w-full"
+                className="mt-4 w-full py-2 rounded-lg border-1 border-red-600 text-black font-semibold hover:bg-red-600 hover:text-white transition-colors"
               >
                 See Details
               </button>

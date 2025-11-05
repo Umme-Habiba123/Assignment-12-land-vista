@@ -22,10 +22,21 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password)
     }
 
-    const signInWithGoogle = () => {
-        setLoading(true)
-        return signInWithPopup(auth, googleProvider)
+   const signInWithGoogle = async () => {
+    setLoading(true);
+    try {
+        const result = await signInWithPopup(auth, googleProvider);
+        setUser(result.user);
+        return result.user;
+    } catch (error) {
+        console.error("Google Sign-in error:", error);
+        alert(error.message); // or show custom toast
+        return null;
+    } finally {
+        setLoading(false);
     }
+};
+
 
     const updateUserProfile=profileInfo=>{
         return updateProfile(auth.currentUser,profileInfo)

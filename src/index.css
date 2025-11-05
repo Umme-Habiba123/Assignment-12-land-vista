@@ -1,34 +1,46 @@
 @import "tailwindcss";
 @plugin "daisyui";
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* ✅ Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sansita:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&display=swap');
 
-
-a.active{
-   color:rgb(8, 164, 8);
-  color: green ;
-   font-weight:bold;
-   scale: 1.1;
+/* ✅ Active Link Styling */
+a.active {
+  color: red;
+  font-weight: 600;
+  transform: scale(1.1);
+  transition: all 0.3s ease;
 }
-/* google font-1 */
+
+/* ✅ Google Font - Urbanist */
 .urbanist-font {
   font-family: "Urbanist", sans-serif;
   font-optical-sizing: auto;
-  font-weight: weight;
+  font-weight: 400;
   font-style: normal;
 }
-/* google font-2 */
+
+/* ✅ Google Font - Sansita */
 .sansita-font {
   font-family: "Sansita", sans-serif;
-  font-weight: normal;
+  font-weight: 400;
   font-style: normal;
 }
 
+/* ✅ Smooth color transition for dark mode */
+* {
+  @apply transition-colors duration-300;
+}
 
+/* ✅ Dark mode global variables */
 html.dark {
-  --bg-color: #000000;
-  --text-color: white;
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background-color: #000;
+  color: #fff;
+}
+
+/* ✅ Optional: Light mode explicit colors */
+html.light {
+  background-color: #fff;
+  color: #000;
 }

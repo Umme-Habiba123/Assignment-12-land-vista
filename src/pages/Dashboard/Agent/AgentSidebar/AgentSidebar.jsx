@@ -22,7 +22,7 @@ const AgentSidebar = () => {
     <div className="flex flex-col h-full bg-base-200 text-black">
       {/* Logo and Title */}
       <div className="flex flex-col items-center lg:items-start p-4">
-        <VistaLand />
+   
         <h2 className="text-xl lg:text-2xl font-bold text-purple-700 mt-4 mb-6 text-center lg:text-left">
           Agent Dashboard
         </h2>

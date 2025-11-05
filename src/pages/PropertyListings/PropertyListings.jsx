@@ -24,7 +24,7 @@ const PropertyListings = () => {
 
   if (isLoading)
     return (
-      <p className="text-center mt-10 text-2xl text-green-600">
+      <p className="text-center mt-10 text-2xl text-black">
         Loading properties...
       </p>
     );
@@ -53,20 +53,22 @@ const PropertyListings = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
+    <div className="max-w-7xl mx-auto p-6 bg-white">
       <Helmet>
         <title>Property Listings | LandVista</title>
       </Helmet>
 
+      {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="btn px-5 mb-5 text-lg flex items-center gap-2"
+        className="btn px-5 mb-5 flex items-center gap-2 text-black hover:text-red-600 border border-gray-300 rounded-lg transition-colors"
       >
         <FaArrowLeftLong /> Back
       </button>
 
-      <h2 className="text-3xl font-bold mb-6 text-purple-700">
-        All Verified Properties
+      {/* Section Heading */}
+      <h2 className="text-4xl font-bold mb-6 text-red-600 sansita-font">
+        All Properties
       </h2>
 
       {/* Search */}
@@ -101,7 +103,7 @@ const PropertyListings = () => {
           filteredProperties.map((property) => (
             <div
               key={property._id}
-              className="bg-white rounded-xl shadow-md p-4 border border-gray-100 hover:shadow-lg transition"
+              className="bg-white rounded-xl shadow-md p-4 border border-gray-100 hover:shadow-red-200 transition-shadow"
             >
               <img
                 src={property.image}
@@ -109,18 +111,18 @@ const PropertyListings = () => {
                 className="h-48 w-full object-cover rounded-lg"
               />
 
-              <h3 className="text-lg font-bold mt-3">{property.title}</h3>
-              <p className="text-sm text-gray-600">{property.location}</p>
+              <h3 className="text-lg font-bold mt-3 text-black">{property.title}</h3>
+              <p className="text-sm text-black">{property.location}</p>
 
               <div className="mt-2 text-sm">
                 <p>
-                  <span className="font-semibold">Agent:</span>{" "}
-                  {property.agentName}
+                  <span className="font-semibold text-black">Agent:</span>{" "}
+                  <span className="text-red-600">{property.agentName}</span>
                 </p>
-                <p className="text-gray-500">{property.agentEmail}</p>
+                <p className="text-black">{property.agentEmail}</p>
               </div>
 
-              <p className="text-purple-600 font-bold mt-2">
+              <p className="text-red-600 font-bold mt-2">
                 ৳{property.minPrice.toLocaleString()} - ৳
                 {property.maxPrice.toLocaleString()}
               </p>
@@ -130,7 +132,7 @@ const PropertyListings = () => {
                   className={`px-2 py-1 rounded-full font-semibold ${
                     property.verificationStatus === "verified"
                       ? "bg-green-100 text-green-700"
-                      : "bg-yellow-100 text-yellow-700"
+                      : "bg-red-100 text-red-700"
                   }`}
                 >
                   {property.verificationStatus}
@@ -142,7 +144,7 @@ const PropertyListings = () => {
                 )}
               </div>
 
-              <p className="text-[12px] text-gray-400 mt-2">
+              <p className="text-[12px] text-black mt-2">
                 Added on: {new Date(property.createdAt).toLocaleDateString()}
               </p>
 
@@ -150,7 +152,7 @@ const PropertyListings = () => {
                 onClick={() =>
                   navigate(`/property-details/${property._id}`)
                 }
-                className="mt-4 btn btn-sm btn-outline btn-primary w-full"
+                className="mt-4 w-full py-2 rounded-lg border-1 border-red-600 text-black font-semibold hover:bg-red-600 hover:text-white transition-colors"
               >
                 See Details
               </button>

@@ -1,6 +1,6 @@
 # 🏡 LandVista Frontend
 
-**Live Demo:** https://gilded-dolphin-31e21d.netlify.app/  
+**Live Demo:** https://real-state-dfc620.netlify.app/  
 **Repository (Client):** https://github.com/Umme-Habiba123/Assignment-12-land-vista-client-site
 
 ---
@@ -12,7 +12,7 @@ It features advanced property filtering, high-quality images, and an intuitive l
 ---
 
 ## 🖼 Screenshot
-![LandVista Screenshot](https://i.ibb.co/Cph2X1ry/savar.webp)
+![LandVista Screenshot](https://i.ibb.co.com/394j0Y5C/Screenshot-2025-11-06-125451.png)
 
 ---
 

@@ -12,7 +12,7 @@ It features advanced property filtering, high-quality images, and an intuitive l
 ---
 
 ## 🖼 Screenshot
-![LandVista Screenshot](https://i.ibb.co.com/394j0Y5C/Screenshot-2025-11-06-125451.png)
+![LandVista Screenshot] - https://i.ibb.co.com/394j0Y5C/Screenshot-2025-11-06-125451.png
 
 ---
 

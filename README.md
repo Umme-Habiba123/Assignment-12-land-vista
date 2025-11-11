@@ -1,6 +1,6 @@
 # 🏡 LandVista Frontend
 
-**Live Demo:** [ https://sage-custard-93c340.netlify.app/ ] 
+**Live Demo:** [ https://splendid-speculoos-8f7544.netlify.app/ ]
 
 **Repository (Client):** https://github.com/Umme-Habiba123/Assignment-12-land-vista-client-site
 
